@@ -53,7 +53,7 @@ exports.modifyPost = (req, res, next) => {
     )
 };
 
-//**********Suppression d'une post
+//**********Suppression d'un post
 exports.deletePost = (req, res, next) => {
 //--Vérification du propriétaire du post et autotisation à l'administrateur
     Post.findOne({ _id: req.params.id })//--On trouve l'objet dans la base de données 

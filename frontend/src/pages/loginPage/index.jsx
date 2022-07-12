@@ -12,8 +12,8 @@ export default function Section() {
     const [signInInAndsignUpOrSignUp, setSignInInAndsignUpOrSignUp] =
         useState(true)
     const navigate = useNavigate()
-    const [token, setToken] = React.useContext(TokenContext)
-    const [userId, setUserId] = React.useContext(UserIdContext)
+    let [token, setToken] = React.useContext(TokenContext)
+    let [userId, setUserId] = React.useContext(UserIdContext)
 
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
@@ -197,12 +197,7 @@ export default function Section() {
                 })
             setSignInInAndsignUpOrSignUp(false)
         }
-        /*         inputChange = (e) => {
-            this.setState({ 
-                name: e.target.value
-            })
-        }  */
-    }
+     }
 
     return signInInAndsignUpOrSignUp ? (
         <section>

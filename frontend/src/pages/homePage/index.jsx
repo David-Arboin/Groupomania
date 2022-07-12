@@ -14,13 +14,15 @@ import { UserIdContext } from '../../App'
 
 /* import {TokenAndUserIdContext} from '../loginPage' */
 
-export default function Section() {
+export default function Section({ handleModification }) {
     const [isLoading, setIsLoading] = useState(true)
     const [posts, setPosts] = useState(null)
     const [users, setUsers] = useState(null)
     const navigate = useNavigate()
-    const [token, setToken] = React.useContext(TokenContext)
-    const [userId, setUserId] = React.useContext(UserIdContext)
+    let [token, setToken] = React.useContext(TokenContext)
+    let [userId, setUserId] = React.useContext(UserIdContext)
+    const [refreshPosts, setRefreshposts] = useState(null)
+    const [modification, setModification] = useState(true)
 
     //**************Affichage des posts
     const fetchData = useCallback(
@@ -107,11 +109,11 @@ export default function Section() {
         fetch('http://localhost:8000/groupomania/posts', requestOptions)
             .then((response) => response.json())
             .then((data) => console.log(data))
-            navigate('/homePage')
     }
 
     //*****************Modification d'un post */
     const handleModify = (event) => {
+        event.preventDefault()
         const target = event.target
         console.log(target)
         /*         posts = posts.filter(a => a.userId !== event.userId)
@@ -120,11 +122,21 @@ export default function Section() {
 
     //****************Suppression d'un post */
     const handleDelete = (event) => {
-        const target = event.target
+        event.preventDefault()
+        let target = event.target.id
         console.log(target)
-
-        /*         posts = posts.filter(a => a.userId !== event.userId)
-        this.setState({posts: posts}) */
+        console.log(posts)
+        /*         let postsDelete = posts.filter(el => !(el._id === target)) */
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { Authorization: 'Bearer ' + token },
+        }
+        fetch(
+            'http://localhost:8000/groupomania/posts/' + target,
+            requestOptions
+        )
+            .then((response) => response.json())
+            .then((data) => console.log(data))
     }
 
     //--Déconnexion
@@ -135,14 +147,16 @@ export default function Section() {
         /*     localStorage.removeItem('userId'); */
         navigate('/')
     }
-
-    return (
+    console.log(users)
+    return isLoading ? (
+        'Loading !'
+    ) : (
         <section className="displaySection">
             <button onClick={logout} className="displayButtonLogout">
                 Déconnexion
             </button>
             <div className="displayCreatePost">
-                <div className="hello">Bienvenue {}</div>
+                <div className="hello">Bienvenue {users.name}</div>
                 <div className="displayTitleCreatePost">
                     <h1>Créer un post</h1>
                 </div>
@@ -152,64 +166,121 @@ export default function Section() {
                         type="text"
                         className="displayText"
                         ref={addTextAreaAndImage}
+                        placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
                     ></textarea>
                     <div className="displayinputImageAndButtonPublish">
                         <input
                             name="image"
                             type="file"
                             accept="image/png, image/jpeg"
-                            className="decoSelectFile"
+                            className="decoSelectFile styleButton"
                             ref={addTextAreaAndImage}
                             id="image"
                         ></input>
-                        <input className="decoButton" type="submit"></input>
+                        <input className="decoButton styleButton" type="submit"></input>
                     </div>
                 </form>
             </div>
-            <div className="displayHeaderSection">
-                <h1>Liste des posts</h1>
-            </div>
+
             <div className="displayPosts">
                 {isLoading
                     ? 'Loading..'
-                    : posts.map((post, index) => (
-                          <div className="displayPost">
-                              <div className="conteneur">
-                                  <h1 className="dispayNamePoster">
-                                      Publier par :{post.email}
-                                  </h1>
-                                  <p className="displayText">
-                                      <img
-                                          src={post.imageUrl}
-                                          alt=""
-                                          align="right"
-                                          className="image"
-                                      />
-                                      {post.post}
-                                  </p>
+                    : posts.map((post, index) =>
+                          post.userId === userId ? (
+                              <div className="displayPost">
+                                  <div className="conteneur">
+                                      <h1 className="dispayNamePoster">
+                                          Votre post
+                                      </h1>
+                                      <p className="displayText">
+                                          <img
+                                              src={post.imageUrl}
+                                              alt=""
+                                              align="right"
+                                              className="image"
+                                          />
+                                          {post.post}
+                                      </p>
+                                  </div>
+                                  <div className="displayLikes">
+                                      {/*                                   <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
+                                      <div className="numberOfLikes"></div>
+                                  </div>
+                                  <div>
+                                      {modification ? (
+                                          <div className="displayButtons">
+                                              <button
+                                                  id={post._id}
+                                                  className="modifyPost styleButton"
+                                                  onClick={() =>
+                                                      setModification(false)
+                                                  }
+                                              >
+                                                  Modifier
+                                              </button>
+                                              <button
+                                                  id={post._id}
+                                                  className="deletePost styleButton"
+                                                  onClick={(e) =>
+                                                      handleDelete(e)
+                                                  }
+                                              >
+                                                  Supprimer
+                                              </button>
+                                          </div>
+                                      ) : (
+                                          <div className="displayButtons">
+                                              <input
+                                                  className="decoButton styleButton"
+                                                  type="submit"
+                                                  name="envoyer"
+                                              ></input>
+                                              <input
+                                                  name="image"
+                                                  type="file"
+                                                  accept="image/png, image/jpeg"
+                                                  className="decoSelectFile styleButton"
+                                                  alt="Modifier l'image"
+                                                  /*                                           ref={addTextAreaAndImageInExistantPost} */
+                                                  id="image"
+                                              ></input>
+                                              <button
+                                                  id={post._id}
+                                                  className="deletePost styleButton"
+                                                  onClick={() =>
+                                                      setModification(true)
+                                                  }
+                                                  /*                                           onClick={(e) => handleAnnulation(e)} */
+                                              >
+                                                  Annuler
+                                              </button>
+                                          </div>
+                                      )}
+                                  </div>
                               </div>
-                              <div className="displayLikes">
-                                  {/*                                   <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
-                                  <div className="numberOfLikes"></div>
-                                  {/*                                <FontAwesomeIcon icon="fa-solid fa-thumbs-down" /> */}
-                                  <div className="numberOfDislikes"></div>
+                          ) : (
+                              <div className="displayPost">
+                                  <div className="conteneur">
+                                      <h1 className="dispayNamePoster">
+                                          Publié par : {post.name}
+                                      </h1>
+                                      <p className="displayText">
+                                          <img
+                                              src={post.imageUrl}
+                                              alt=""
+                                              align="right"
+                                              className="image"
+                                          />
+                                          {post.post}
+                                      </p>
+                                  </div>
+                                  <div className="displayLikes">
+                                      {/*                                   <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
+                                      <div className="numberOfLikes"></div>
+                                  </div>
                               </div>
-                              <div className="displayButtons">
-                                  <button
-                                      className="modifyPost"
-                                      onClick={(e) => handleModify(e)}
-                                  >
-                                      Modifier
-                                  </button>
-                                  <button
-                                      className="deletePost"
-                                      onClick={(e) => handleDelete(e)}
-                                  >
-                                      Supprimer
-                                  </button>
-                              </div>
-                          </div>
-                      ))}
+                          )
+                      )}
             </div>
         </section>
     )
