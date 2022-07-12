@@ -1,0 +1,69 @@
+@use '../../../src/styles/variables' as *;
+
+.header {
+    color: $color-black;
+}
+
+/*Smartphone*/
+@media (max-width: 426px) {
+
+    .header
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        aspect-ratio: 10/1;
+        background-color:  $color-primary;
+        font-size: 3vw;
+        padding-bottom: 2vw;
+    }
+    header img
+    {
+        text-align: center;
+    }
+}
+
+/*Tablette*/
+@media (min-width: 426px) and (max-width: 1023px) {
+    .header
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-color:  $color-primary;
+    }
+    header img
+    {
+        text-align: center;
+    }
+}
+
+/*Desktop*/
+@media (min-width: 1024px) {
+
+    .header
+    {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        background-color:  $color-primary;
+    }
+    .displayHeader {
+        width: auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+    }
+    header img
+    {
+        text-align: center;
+        width: 200px;
+    }
+}

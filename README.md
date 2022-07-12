@@ -1,0 +1,1 @@
+Pour démarrer l'application, faire 'go' dans un terminal

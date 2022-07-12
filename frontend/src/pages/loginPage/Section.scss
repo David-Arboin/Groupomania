@@ -1,0 +1,153 @@
+@use '../../../src/styles/variables' as *;
+
+section {
+    color: $color-white;
+}
+
+h1, label{
+    color: $color-tertiary
+}
+::placeholder {
+    color: $color-alert;
+  }
+
+.error{
+    text-align: left;
+    color: $color-alert;
+}
+
+label .password-icon {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    width: 20px;
+    color: #f9f9f9;
+    transition: all 0.2s;
+  }
+
+  label .password-icon:hover {
+    cursor: pointer;
+    color: #ff4754;
+  }
+  
+  label .password-icon .fa-eye-slash {
+    display: none;
+  }
+  
+/*Smartphone*/
+@media (max-width: 426px) {
+    section {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin-left: 10%;
+    }
+    
+    .signUp, .signIn {
+        text-align: center;
+    }
+    .separator {
+        height: 1%;
+        aspect-ratio: 50/1;
+        background-color:  $color-primary;
+        
+    }
+    
+    .displayLogin, .displaySignup {
+        width: 100%;
+        aspect-ratio: 1/0.5;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+    
+    .displayResetSubmit{
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    label {
+        text-align: left;
+    }
+}
+
+/*Tablette*/
+@media (min-width: 426px) and (max-width: 1023px) {
+    section {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+    
+    .login, .signup {
+        text-align: center;
+    }
+    .separator {
+        width: 1%;
+        aspect-ratio: 1/100;
+        background-color:  $color-primary;
+    }
+    
+    .displayLogin, .displaySignup {
+        width: 100%;
+        aspect-ratio: 1/0.5;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+    
+    .displayResetSubmit{
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    label {
+        text-align: left;
+    }
+}
+
+/*Desktop*/
+@media (min-width: 1024px) {
+
+    section {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+    }
+    
+    .login, .signup {
+        text-align: center;
+        max-width: 50%;
+    }
+    .separator {
+        width: 1%;
+        aspect-ratio: 1/100;
+        background-color:  $color-primary;
+    }
+    
+    .displayLogin, .displaySignup {
+        width: 100%;
+        aspect-ratio: 1/0.5;
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
+    
+    .displayResetSubmit{
+        width: 60%;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    label {
+        text-align: left;
+    }
+}

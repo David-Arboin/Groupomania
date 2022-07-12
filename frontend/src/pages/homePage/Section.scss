@@ -1,0 +1,99 @@
+@use '../../../src/styles/variables' as *;
+
+.dispayNamePoster {
+    color: $color-secondary;
+}
+.displaySection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid green;
+}
+.displayButtonLogout{
+    position: absolute;
+    top: 2.5%;
+    right: 2.5%;
+    width: 5%;
+    aspect-ratio: 1/0.5;
+    cursor: pointer;
+}
+
+.displayCreatePost {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px 0 20px 0;
+    border: 2px solid greenyellow;
+}
+.displayTitleCreatePost{
+    display: flex;
+}
+.displayinputImageAndButtonPublish {
+    display: flex;
+    justify-content: space-between;
+}
+.image {
+    float: left;
+    margin-right: 10px;
+    margin: 5px;
+    border-radius: 30px;
+}
+.displayText {
+    display: flex;
+    justify-content: flex-start;
+    min-width: 100%;
+    min-height: 200px;
+    border: 2px solid white;
+}
+.displayHeaderSection {
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin: 20px;
+    border: 2px solid white;
+}
+.displayButtons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 50px 0 50px 0;
+    border: 2px solid orange;
+}
+
+.displayPosts {
+    display: flex;
+    width: 80%;
+    margin-bottom: 50px;
+    flex-direction: column;
+    border-radius: 1%;
+    justify-content: center;
+}
+.displayPost {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    background-color: $color-tertiary;
+    border-radius: 30px;
+
+}
+
+.conteneur {
+    width: 100%;
+    border: 2px solid $color-tertiary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    width: 20%;
+}
+.deletePost,
+.modifyPost {
+    cursor: pointer;
+}
