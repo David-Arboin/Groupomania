@@ -8,7 +8,9 @@ import React, {
 } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRef } from 'react'
+import ReactDOM from 'react-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 
@@ -23,6 +25,9 @@ export default function Section({ handleModification }) {
     let [userId, setUserId] = React.useContext(UserIdContext)
     const [refreshPosts, setRefreshposts] = useState(null)
     const [modification, setModification] = useState(true)
+    const [like, setLike] = useState(true)
+    const [annulation, setAnnulation] = useState(false)
+    const [addLike, setAddLike] = useState(false)
 
     //**************Affichage des posts
     const fetchData = useCallback(
@@ -93,7 +98,6 @@ export default function Section({ handleModification }) {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        console.log(userId)
         const form = e.target
         const formData = new FormData()
         formData.append('post', form[0].value)
@@ -120,13 +124,13 @@ export default function Section({ handleModification }) {
     this.setState({posts: posts}) */
     }
 
-    //****************Suppression d'un post */
+    //--Annuler la modification d'un post
+
+    //****************Suppression d'un post
     const handleDelete = (event) => {
         event.preventDefault()
         let target = event.target.id
         console.log(target)
-        console.log(posts)
-        /*         let postsDelete = posts.filter(el => !(el._id === target)) */
         const requestOptions = {
             method: 'DELETE',
             headers: { Authorization: 'Bearer ' + token },
@@ -147,7 +151,34 @@ export default function Section({ handleModification }) {
         /*     localStorage.removeItem('userId'); */
         navigate('/')
     }
-    console.log(users)
+console.log(token)
+console.log(userId)
+console.log(posts)
+    //--Like
+    const handleLike = (event) => {
+        let target = event
+
+        const requestOptions = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            method: 'POST',
+            headers: { Authorization: 'Bearer ' + token },
+            body: JSON.stringify({
+                userId: userId,
+                like: 1,
+            }),
+        }
+        console.log(target)
+
+        fetch(
+            'http://localhost:8000/groupomania/posts/' + target + '/like',
+            requestOptions
+        )
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+
+    }
+
     return isLoading ? (
         'Loading !'
     ) : (
@@ -177,7 +208,10 @@ export default function Section({ handleModification }) {
                             ref={addTextAreaAndImage}
                             id="image"
                         ></input>
-                        <input className="decoButton styleButton" type="submit"></input>
+                        <input
+                            className="decoButton styleButton"
+                            type="submit"
+                        ></input>
                     </div>
                 </form>
             </div>
@@ -203,7 +237,6 @@ export default function Section({ handleModification }) {
                                       </p>
                                   </div>
                                   <div className="displayLikes">
-                                      {/*                                   <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
                                       <div className="numberOfLikes"></div>
                                   </div>
                                   <div>
@@ -218,6 +251,36 @@ export default function Section({ handleModification }) {
                                               >
                                                   Modifier
                                               </button>
+
+                                              <div className="displayLikes">
+                                                  <div className="displayLikesAndNumberLikes">
+                                                      {like === 1 ? (
+                                                          <FontAwesomeIcon
+                                                              icon={faThumbsUp}
+                                                              onClick={() =>
+                                                                  handleLike(
+                                                                      post._id
+                                                                  )
+                                                              }
+                                                              className="likeOff"
+                                                          ></FontAwesomeIcon>
+                                                      ) : (
+                                                          <FontAwesomeIcon
+                                                              icon={faThumbsUp}
+                                                              onClick={() =>
+                                                                  handleLike(
+                                                                      post._id
+                                                                  )
+                                                              }
+                                                              className="likeOn"
+                                                          ></FontAwesomeIcon>
+                                                      )}
+                                                      <p className="numberOfLikes">
+                                                          {post.likes}
+                                                      </p>
+                                                  </div>
+                                              </div>
+
                                               <button
                                                   id={post._id}
                                                   className="deletePost styleButton"
@@ -241,7 +304,6 @@ export default function Section({ handleModification }) {
                                                   accept="image/png, image/jpeg"
                                                   className="decoSelectFile styleButton"
                                                   alt="Modifier l'image"
-                                                  /*                                           ref={addTextAreaAndImageInExistantPost} */
                                                   id="image"
                                               ></input>
                                               <button
@@ -250,7 +312,6 @@ export default function Section({ handleModification }) {
                                                   onClick={() =>
                                                       setModification(true)
                                                   }
-                                                  /*                                           onClick={(e) => handleAnnulation(e)} */
                                               >
                                                   Annuler
                                               </button>
@@ -275,8 +336,28 @@ export default function Section({ handleModification }) {
                                       </p>
                                   </div>
                                   <div className="displayLikes">
-                                      {/*                                   <FontAwesomeIcon icon="fa-solid fa-thumbs-up" /> */}
-                                      <div className="numberOfLikes"></div>
+                                      <div className="displayLikesAndNumberLikes">
+                                          {like === 1 ? (
+                                              <FontAwesomeIcon
+                                                  icon={faThumbsUp}
+                                                  onClick={() =>
+                                                      handleLike(post._id)
+                                                  }
+                                                  className="likeOff"
+                                              ></FontAwesomeIcon>
+                                          ) : (
+                                              <FontAwesomeIcon
+                                                  icon={faThumbsUp}
+                                                  onClick={() =>
+                                                      handleLike(post._id)
+                                                  }
+                                                  className="likeOn"
+                                              ></FontAwesomeIcon>
+                                          )}
+                                          <p className="numberOfLikes">
+                                              {post.likes}
+                                          </p>
+                                      </div>
                                   </div>
                               </div>
                           )

@@ -33,7 +33,31 @@
     aspect-ratio: 1/0.5;
     cursor: pointer;
 }
+.like
+{
+    cursor: pointer;
+}
 
+.likeOff{
+    color: white
+}
+
+.likeOn{
+    color: $color-secondary
+}
+
+.displayLikes{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.displayLikesAndNumberLikes{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 15%;
+}
 .displayCreatePost {
     width: 80%;
     display: flex;

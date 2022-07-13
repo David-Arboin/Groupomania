@@ -89,29 +89,26 @@ exports.getAllPosts = (req, res, next) => {
         .catch(error => res.status(400).json({ error }));
 };
 
-//**********Likes et Dislikes
+//**********Likes
 exports.likePost = (req, res, next) => {
 
 //--Si l'utilisateur ajoute un like
  if (req.body.like === 1) {
+  console.log(req.body)
     Post.findOne({ _id: req.params.id }).then(
       (post) => {
-//--On regarde s'il est déjà dans le tableau "usersliked"
-//--S'il n'y est pas, on l'ajoute au tableau "usersDisliked"
-if (!sauce.usersLiked.includes(req.body.userId)) {
+//--On regarde s'il est déjà dans le tableau "usersLiked"
+//--S'il n'y est pas, on incrémente "Like" et on l'ajoute au tableau "usersLiked"
+if (!post.usersLiked.includes(req.body.userId)) {
+  console.log('ICI')
         if (!post.usersLiked.includes(req.body.userId)) {
           Post.updateOne({ _id: req.params.id }, { $inc: { likes: +1 }, $push: { usersLiked: req.body.userId } }
           )
             .then(() => res.status(200).json({ message: "Like Ok !" }))
             .catch((error) => res.status(400).json({ error }));
-        } else {
-          res.status(200).json({ message: 'Dislike déjà enregistré !'})
-        }
-    }else {
-      res.status(200).json({ message: 'Vous devez dabord retirer votre like !'})
-    }
-      })
-  }
+        } 
+      }})
+ }
 
 
 //--Si l'utilisateur supprime son "like"

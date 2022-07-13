@@ -21,7 +21,7 @@ router.get('/:id', auth, postsCtrl.getOnePost);
 //--Route GET qui renvoie toutes les Posts dans la base de données
 router.get('/', auth, postsCtrl.getAllPosts);
 
-module.exports = router;
-
 //*****Route des likes
 router.post('/:id/like', auth, postsCtrl.likePost)
+
+module.exports = router;
