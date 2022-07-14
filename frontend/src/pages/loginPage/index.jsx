@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
+import { NameContext } from '../../App'
+
 
 export default function Section() {
     // React States
@@ -14,6 +16,8 @@ export default function Section() {
     const navigate = useNavigate()
     let [token, setToken] = React.useContext(TokenContext)
     let [userId, setUserId] = React.useContext(UserIdContext)
+    let [name, setName] = React.useContext(NameContext)
+
 
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
@@ -124,9 +128,15 @@ export default function Section() {
                 .then((data) => {
                     setToken(data.token)
                     setUserId(data.userId)
+                    setName(data.name)
+                    navigate('/homePage')
+                })
+                .catch (function(error) {
+                    console.log('Il y a un problème de connexion')
+                    alert('Il y a un problème de connexion')
+                    navigate('/')
                 })
 
-            navigate('/homePage')
         }
     }
     //************************************SignUp

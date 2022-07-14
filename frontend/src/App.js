@@ -11,34 +11,40 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 export const TokenContext = React.createContext()
 export const UserIdContext = React.createContext()
+export const NameContext = React.createContext()
 
 function App() {
     const [token, setToken] = React.useState()
     const [userId, setUserId] = React.useState()
+    const [name, setName] = React.useState()
 
     return (
         <div className="App">
             <Router>
                 <TokenContext.Provider value={[token, setToken]}>
                     <UserIdContext.Provider value={[userId, setUserId]}>
-                        <Header />
-                        <Routes>
-                            <Route
-                                exact
-                                path="/loginPage"
-                                element={<LoginPage />}
-                            ></Route>
-                            <Route
-                                path="/"
-                                element={<Navigate replace to="/loginPage" />}
-                            ></Route>
-                            <Route
-                                path="/homePage"
-                                element={<HomePage />}
-                            ></Route>
-                            <Route component={<NotFound />}></Route>
-                        </Routes>
-                        <Footer />
+                        <NameContext.Provider value={[name, setName]}>
+                            <Header />
+                            <Routes>
+                                <Route
+                                    exact
+                                    path="/loginPage"
+                                    element={<LoginPage />}
+                                ></Route>
+                                <Route
+                                    path="/"
+                                    element={
+                                        <Navigate replace to="/loginPage" />
+                                    }
+                                ></Route>
+                                <Route
+                                    path="/homePage"
+                                    element={<HomePage />}
+                                ></Route>
+                                <Route component={<NotFound />}></Route>
+                            </Routes>
+                            <Footer />
+                        </NameContext.Provider>
                     </UserIdContext.Provider>
                 </TokenContext.Provider>
             </Router>

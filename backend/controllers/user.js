@@ -57,7 +57,7 @@ exports.login = (req, res, next) => {
                 if (!valid) {
                 return res.status(401).json({ error: 'Mot de passe incorrect !'})
                 }
-//--Si l'email et le mot de passe son OK, on renvoit au frontend ce qu'il attend > L'userId et le token
+//--Si l'email et le mot de passe son OK, on renvoit au frontend ce qu'il attend > L'userId, le name et le token
                 res.status(200).json({
                     userId: user._id,
                     name:user.name,

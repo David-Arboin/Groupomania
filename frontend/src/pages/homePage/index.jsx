@@ -13,16 +13,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
+import { NameContext } from '../../App'
+
 
 /* import {TokenAndUserIdContext} from '../loginPage' */
 
 export default function Section({ handleModification }) {
+
+    let [token, setToken] = React.useContext(TokenContext)
+    let [userId, setUserId] = React.useContext(UserIdContext)
+    let [name, setName] = React.useContext(NameContext)
+
     const [isLoading, setIsLoading] = useState(true)
     const [posts, setPosts] = useState(null)
     const [users, setUsers] = useState(null)
     const navigate = useNavigate()
-    let [token, setToken] = React.useContext(TokenContext)
-    let [userId, setUserId] = React.useContext(UserIdContext)
+
+
+
     const [refreshPosts, setRefreshposts] = useState(null)
     const [modification, setModification] = useState(true)
     const [like, setLike] = useState(true)
@@ -30,7 +38,40 @@ export default function Section({ handleModification }) {
     const [addLike, setAddLike] = useState(false)
 
     //**************Affichage des posts
-    const fetchData = useCallback(
+function displayPosts () {
+    const requestOptions = {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+        },
+    }
+    fetch(
+        "http://localhost:8000/groupomania/posts", requestOptions
+    )
+    .then(response => response.json())
+    .then(data => setPosts(data))
+}
+    useEffect(() =>{
+
+    },[posts])
+
+    useEffect(() =>{
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token,
+            },
+        }
+        fetch(
+            "http://localhost:8000/groupomania/users", requestOptions
+        )
+        .then(response => response.json())
+        .then(data => setUsers(data))
+    },[users])
+/* 
+     const fetchData = useCallback(
         async (postsOrusers) => {
             const requestOptions = {
                 method: 'GET',
@@ -39,6 +80,7 @@ export default function Section({ handleModification }) {
                     Authorization: 'Bearer ' + token,
                 },
             }
+
 
             const response = await fetch(
                 `http://localhost:8000/groupomania/${postsOrusers}/`,
@@ -51,9 +93,10 @@ export default function Section({ handleModification }) {
             return data
         },
         [token]
-    )
+    ) */
 
-    useEffect(() => {
+
+/*     useEffect(() => {
         const getPostsAndUsers = async () => {
             try {
                 const posts = await fetchData('posts')
@@ -80,13 +123,17 @@ export default function Section({ handleModification }) {
         if (token) {
             getPostsAndUsers()
         }
-    }, [token, fetchData])
+    }, [token, fetchData]) */
 
+
+
+    
     useEffect(() => {
         if (posts && users) {
             setIsLoading(false)
         }
     }, [posts, users])
+    
     //*****************Création d'un post
 
     //--Récupération de la saisie de textArea et de l'image
@@ -102,7 +149,7 @@ export default function Section({ handleModification }) {
         const formData = new FormData()
         formData.append('post', form[0].value)
         formData.append('image', form[1].files[0])
-        /*         let time = e.timeStamp */
+        let time = e.timeStamp
         console.log(form[0].value)
         console.log(form[1].files[0])
         const requestOptions = {
@@ -140,23 +187,20 @@ export default function Section({ handleModification }) {
             requestOptions
         )
             .then((response) => response.json())
-            .then((data) => console.log(data))
+            .then((data) => {setPosts(posts)})
     }
 
     //--Déconnexion
     const logout = (e) => {
         setToken('')
         setUserId('')
-
-        /*     localStorage.removeItem('userId'); */
+        setName('')
         navigate('/')
     }
-console.log(token)
-console.log(userId)
-console.log(posts)
+
     //--Like
     const handleLike = (event) => {
-        let target = event
+        let postId = event
 
         const requestOptions = {
             'Accept': 'application/json',
@@ -168,17 +212,21 @@ console.log(posts)
                 like: 1,
             }),
         }
-        console.log(target)
 
         fetch(
-            'http://localhost:8000/groupomania/posts/' + target + '/like',
+            'http://localhost:8000/groupomania/posts/' + postId + '/like',
             requestOptions
         )
             .then((response) => response.json())
             .then((data) => console.log(data))
+            console.log(postId)
 
     }
-
+    console.log(posts)
+    console.log(users)
+    console.log(userId)
+    console.log(name)
+    
     return isLoading ? (
         'Loading !'
     ) : (
@@ -187,7 +235,7 @@ console.log(posts)
                 Déconnexion
             </button>
             <div className="displayCreatePost">
-                <div className="hello">Bienvenue {users.name}</div>
+                <div className="hello">Bienvenue {name}</div>
                 <div className="displayTitleCreatePost">
                     <h1>Créer un post</h1>
                 </div>
