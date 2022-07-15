@@ -91,16 +91,16 @@ exports.getAllPosts = (req, res, next) => {
 
 //**********Likes
 exports.likePost = (req, res, next) => {
+  console.log(req.body.like)
 
 //--Si l'utilisateur ajoute un like
  if (req.body.like === 1) {
-  console.log(req.body)
+
     Post.findOne({ _id: req.params.id }).then(
       (post) => {
 //--On regarde s'il est déjà dans le tableau "usersLiked"
 //--S'il n'y est pas, on incrémente "Like" et on l'ajoute au tableau "usersLiked"
 if (!post.usersLiked.includes(req.body.userId)) {
-  console.log('ICI')
         if (!post.usersLiked.includes(req.body.userId)) {
           Post.updateOne({ _id: req.params.id }, { $inc: { likes: +1 }, $push: { usersLiked: req.body.userId } }
           )
