@@ -95,7 +95,7 @@ exports.likePost = (req, res, next) => {
 
 //--Si l'utilisateur ajoute un like
  if (req.body.like === 1) {
-
+console.log('ICI')
     Post.findOne({ _id: req.params.id }).then(
       (post) => {
 //--On regarde s'il est déjà dans le tableau "usersLiked"
