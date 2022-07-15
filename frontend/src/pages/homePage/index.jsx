@@ -156,6 +156,7 @@ export default function Section() {
     const handleModification = (event) => {
         event.preventDefault()
         const form = event.target
+        console.log(form)
         const formData = new FormData()
          formData.append('post', form[0].value)
         formData.append('image', form[1].files[0])
@@ -188,8 +189,6 @@ export default function Section() {
                     })
             })
     }
-
-    //--Annuler la modification d'un post
 
     //****************Suppression d'un post
     const handleDelete = async (event) => {
@@ -236,16 +235,15 @@ export default function Section() {
     const handleLike = async (event) => {
         let postId = event
 
-        const data = {
-            "like": 1,
-        }
-
         const requestOptionsLike = {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             method: 'POST',
             headers: { Authorization: 'Bearer ' + token },
-            body: JSON.stringify(data),
+            body: JSON.stringify({
+                userId: userId,
+                like: 1,
+            }),
         }
 
          await fetch(
@@ -271,12 +269,8 @@ export default function Section() {
                         setPosts(data)
                         console.log('ICI')
                     })
-
-
-
             })
-        
-    }
+        }
 
     useEffect(() => {
         if (!posts) {
@@ -306,7 +300,7 @@ export default function Section() {
                     <textarea
                         name="post"
                         type="text"
-                        className="displayText"
+                        className="displayTextArea"
                         ref={addTextAreaAndImage}
                         placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
                     ></textarea>
@@ -337,15 +331,19 @@ export default function Section() {
                                       <h1 className="dispayNamePoster">
                                           Publié par : {post.name}
                                       </h1>
-                                      <p className="displayText">
+                                      <div className='displayTextAndImage'>
+                                      <div className="displayImage">
                                           <img
                                               src={post.imageUrl}
                                               alt=""
                                               align="right"
                                               className="image"
                                           />
+                                          <h1 className='displayText'>
                                           {post.post}
-                                      </p>
+                                          </h1>
+                                      </div>
+                                      </div>
                                   </div>
                                   <div className="displayLikes">
                                       <div className="displayLikesAndNumberLikes">
@@ -382,7 +380,7 @@ export default function Section() {
                                           <textarea
                                               name="post"
                                               type="text"
-                                              className="displayText"
+                                              className="displayTextAreaToModif"
                                               ref={addTextAreaAndImage}
                                               placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
                                           ></textarea>
@@ -420,15 +418,19 @@ export default function Section() {
                                       <h1 className="dispayNamePoster">
                                           Votre post
                                       </h1>
-                                      <p className="displayText">
+                                      <div className='displayTextAndImage'>
+                                      <div className="displayImage">
                                           <img
                                               src={post.imageUrl}
                                               alt=""
                                               align="right"
                                               className="image"
                                           />
+                                          <h1 className='displayText'>
                                           {post.post}
-                                      </p>
+                                          </h1>
+                                        </div>
+                                      </div>
                                   </div>
                                   <div className="displayButtons">
                                       <button
