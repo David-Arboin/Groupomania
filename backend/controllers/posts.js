@@ -24,7 +24,7 @@ exports.modifyPost = (req, res, next) => {
 //--Test > Nouvelle image ou non
     const postObject = req.file ? //--req.file ? est un opérateur ternaire pour savoir si un fichier existe
     {
-        ...JSON.parse(req.body.post),
+        ...(req.body.post),
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`//--Reconstruction de l'Url de l'image
     } : { ...req.body }
 //--Récupération du post dans la base et vérification qu'il appartient bien à la personne qui effectue la requête delete
@@ -95,7 +95,6 @@ exports.likePost = (req, res, next) => {
 
 //--Si l'utilisateur ajoute un like
  if (req.body.like === 1) {
-console.log('ICI')
     Post.findOne({ _id: req.params.id }).then(
       (post) => {
 //--On regarde s'il est déjà dans le tableau "usersLiked"
