@@ -9,6 +9,8 @@ const postSchema = mongoose.Schema({
     time: {type: Number, required: false }, //-- Time
     likes: {type: Number, required: false, default: 0 }, //-- nombre d'utilisateurs qui aiment (= likent) le post
     usersLiked: { type: [String], required: false }, //-- tableau des identifiants des utilisateurs qui ont aimé (= liked) le post
+}, {
+    timestamps: true
 });
 
 postSchema.plugin(mongooseErrors);

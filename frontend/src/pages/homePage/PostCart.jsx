@@ -19,58 +19,110 @@ const PostCard = (props) => {
 
     //*****************Modification d'un post */
     const sendModification = (event) => {
-        const setModification = (e) => {
-            const target = e.target
-            console.log(target)
-        }
         event.preventDefault()
         const form = event.target
         const postId = form[1].id
-        console.log(form[1].id)
         const formData = new FormData()
-        formData.append('post', form[0].value)
-        formData.append('image', form[2].files[0])
-        console.log(form[0].value)
-        console.log(form[2].files[0])
-
         const requestOptionsModifiyPost = {
             method: 'PUT',
             headers: { Authorization: 'Bearer ' + token },
             body: formData,
         }
 
-        fetch(
-            'http://localhost:8000/groupomania/posts/' + postId,
-            requestOptionsModifiyPost
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                const requestOptions = {
-                    method: 'GET',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Authorization: 'Bearer ' + token,
-                    },
-                }
-                const newArrayPosts = fetch(
-                    'http://localhost:8000/groupomania/posts',
-                    requestOptions
-                )
-                    .then((response) => response.json())
-                    .then((data) => {
-                        setPosts(data)
-                        if(data){
-                          setModification(false)
-                        }
-                    })
-            })
+        if (form[0].value === '' && form[2].files[0] === undefined) {
+            alert('Vous avez oublié de saisir un texte et/ou un image')
+        } else if (form[0].value === '' && form[2].files[0] !== undefined) {
+            formData.append('image', form[2].files[0])
+
+            fetch(
+                'http://localhost:8000/groupomania/posts/' + postId,
+                requestOptionsModifiyPost
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + token,
+                        },
+                    }
+                    const newArrayPosts = fetch(
+                        'http://localhost:8000/groupomania/posts',
+                        requestOptions
+                    )
+                        .then((response) => response.json())
+                        .then((data) => {
+                            setPosts(data)
+                            if (data) {
+                                setModification(false)
+                            }
+                        })
+                })
+        } else if (form[0].value !== '' && form[2].files[0] === undefined) {
+            formData.append('post', form[0].value)
+
+            fetch(
+                'http://localhost:8000/groupomania/posts/' + postId,
+                requestOptionsModifiyPost
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + token,
+                        },
+                    }
+                    const newArrayPosts = fetch(
+                        'http://localhost:8000/groupomania/posts',
+                        requestOptions
+                    )
+                        .then((response) => response.json())
+                        .then((data) => {
+                            setPosts(data)
+                            if (data) {
+                                setModification(false)
+                            }
+                        })
+                })
+        } else if (form[0].value !== '' && form[2].files[0] !== undefined) {
+            formData.append('post', form[0].value)
+            formData.append('image', form[2].files[0])
+
+            fetch(
+                'http://localhost:8000/groupomania/posts/' + postId,
+                requestOptionsModifiyPost
+            )
+                .then((response) => response.json())
+                .then((data) => {
+                    const requestOptions = {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: 'Bearer ' + token,
+                        },
+                    }
+                    const newArrayPosts = fetch(
+                        'http://localhost:8000/groupomania/posts',
+                        requestOptions
+                    )
+                        .then((response) => response.json())
+                        .then((data) => {
+                            setPosts(data)
+                            if (data) {
+                                setModification(false)
+                            }
+                        })
+                })
+        }
     }
 
     //****************Suppression d'un post
     const handleDelete = async (event) => {
         event.preventDefault()
         let target = event.target.id
-        console.log(target)
         const requestOptionsDelete = {
             method: 'DELETE',
             headers: { Authorization: 'Bearer ' + token },

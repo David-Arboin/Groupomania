@@ -129,7 +129,13 @@ export default function Section() {
                     setToken(data.token)
                     setUserId(data.userId)
                     setName(data.name)
-                    navigate('/homePage')
+                    console.log(data.token)
+                    console.log(data)
+                    if(data.userId === undefined){
+                        alert("Veuillez vous inscrire sur la partie de gauche")
+                    } else {
+                        navigate('/homePage')
+                    }
                 })
                 .catch (function(error) {
                     console.log('Il y a un problème de connexion')
@@ -204,6 +210,8 @@ export default function Section() {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
+                    alert("Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter")
+
                 })
             setSignInInAndsignUpOrSignUp(false)
         }

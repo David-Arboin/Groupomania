@@ -13,10 +13,11 @@ exports.createPost = (req, res, next) => {
       post: postObject,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`//--Reconstruction de l'Url de l'image
     });
-console.log(post)
     post.save()
       .then(() => res.status(201).json({ message: 'Post enregistré !'}))
       .catch(error => res.status(400).json({ error }));
+console.log(post.createdAt)
+
 };
 
 //**********Modification d'un post
