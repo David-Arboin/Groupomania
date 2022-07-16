@@ -1,11 +1,12 @@
 @use '../../../src/styles/variables' as *;
 
-.header {
-    color: $color-black;
+.header
+{
+    background-color: $color-tertiary;
 }
 
 /*Smartphone*/
-@media (max-width: 426px) {
+@media (max-width: 425px) {
 
     .header
     {
@@ -15,13 +16,14 @@
         flex-direction: column;
         align-items: center;
         aspect-ratio: 10/1;
-        background-color:  $color-primary;
         font-size: 3vw;
         padding-bottom: 2vw;
     }
     header img
     {
         text-align: center;
+        width: 50%;
+        margin-top: 2.5%;
     }
 }
 
@@ -34,7 +36,6 @@
         justify-content: center;
         align-items: center;
         height: 100px;
-        background-color:  $color-primary;
     }
     header img
     {
@@ -52,7 +53,6 @@
         justify-content: center;
         align-items: center;
         height: 100px;
-        background-color:  $color-primary;
     }
     .displayHeader {
         width: auto;

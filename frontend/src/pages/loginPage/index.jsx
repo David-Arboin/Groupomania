@@ -228,20 +228,17 @@ export default function Section() {
                 <form
                     className="displayLogin"
                     onSubmit={handleFormSignIn}
-                    /* onChange={handleFormChange} */
                 >
                     <label>
-                        Email ou Nom complet ou pseudonyme ou n° sécu
-                        {/* : {this.state.name} */}
+                        Email
                     </label>
                     <label>
                         <input
                             name="email"
-                            type="text"
+                            type="email"
                             ref={addInputsSignIn}
                             id="emailSignIn"
-                            /* onChange={this.inputChange} */
-                            /*                             style={renderErrorStyle} */
+                            placeholder=''
                         />
                         <div className="password-icon">
                             <i className="fa-solid fa-eye"></i>
@@ -290,7 +287,7 @@ export default function Section() {
                     <label type="email">Email</label>
                     <input
                         name="email"
-                        type="text"
+                        type="email"
                         ref={addInputsSignUp}
                         id="emailSignUp"
                     />

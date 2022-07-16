@@ -1,17 +1,33 @@
 @use '../../../src/styles/variables' as *;
 
-section {
-    color: $color-white;
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-h1, label{
-    color: $color-tertiary
+h1,
+label {
+    color: $color-tertiary;
+    font-family: 'Roboto', sans-serif;
 }
-::placeholder {
+
+#emailSignIn::placeholder,
+#passwordSignIn::placeholder,
+#emailSignUp::placeholder,
+#passwordSignIn::placeholder,
+#nameSignUp::placeholder,
+#passwordSignUp::placeholder {
     color: $color-alert;
-  }
+}
 
-.error{
+.error {
     text-align: left;
     color: $color-alert;
 }
@@ -26,17 +42,17 @@ label .password-icon {
     width: 20px;
     color: #f9f9f9;
     transition: all 0.2s;
-  }
+}
 
-  label .password-icon:hover {
+label .password-icon:hover {
     cursor: pointer;
     color: #ff4754;
-  }
-  
-  label .password-icon .fa-eye-slash {
+}
+
+label .password-icon .fa-eye-slash {
     display: none;
-  }
-  
+}
+
 /*Smartphone*/
 @media (max-width: 426px) {
     section {
@@ -46,34 +62,92 @@ label .password-icon {
         justify-content: space-evenly;
         margin-left: 10%;
     }
-    
-    .signUp, .signIn {
+
+    .signUp,
+    .signIn {
         text-align: center;
+    }
+
+    input {
+        background: linear-gradient(
+            -100deg,
+            $color-primary,
+            $color-tertiary,
+            $color-secondary
+        );
+        background-size: 200% 200%;
+        animation: gradient 15s ease infinite;
+        cursor: grab;
+    }
+
+    input[type='text'] {
+        width: 40%;
+        transition: ease-in-out, width 0.35s ease-in-out;
+    }
+
+    input[type='email'] {
+        width: 50%;
+        transition: ease-in-out, width 0.35s ease-in-out;
+    }
+
+    input[type='password'] {
+        width: 60%;
+        transition: ease-in-out, width 0.35s ease-in-out;
+    }
+
+    input[type='text']:focus,
+    input[type='email']:focus,
+    input[type='password']:focus {
+        width: 100%;
+        background: $color-white;
+    }
+
+    input[type='reset']:active,
+    input[type='submit']:active {
+        cursor: grabbing;
+    }
+    label {
+        font-size: 6vw;
     }
     .separator {
         height: 1%;
         aspect-ratio: 50/1;
-        background-color:  $color-primary;
-        
+        background-color: $color-tertiary;
     }
-    
-    .displayLogin, .displaySignup {
+
+    .displayLogin,
+    .displaySignup {
         width: 100%;
         aspect-ratio: 1/0.5;
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
     }
-    
-    .displayResetSubmit{
-        width: 60%;
+
+    .displayResetSubmit {
+        width: 75%;
         display: flex;
         justify-content: space-between;
+        margin: 10% 0 10% 0;
     }
-    
+
     label {
         text-align: left;
     }
+}
+
+#nameSignUp::placeholder {
+    font-size: 3vw;
+}
+
+#emailSignIn::placeholder,
+#emailSignUp::placeholder {
+    font-size: 4vw;
+}
+
+#passwordSignIn::placeholder,
+#passwordSignUp::placeholder {
+    font-size: 3.4vw;
 }
 
 /*Tablette*/
@@ -84,30 +158,32 @@ label .password-icon {
         justify-content: space-evenly;
         flex-wrap: wrap;
     }
-    
-    .login, .signup {
+
+    .login,
+    .signup {
         text-align: center;
     }
     .separator {
         width: 1%;
         aspect-ratio: 1/100;
-        background-color:  $color-primary;
+        background-color: $color-tertiary;
     }
-    
-    .displayLogin, .displaySignup {
+
+    .displayLogin,
+    .displaySignup {
         width: 100%;
         aspect-ratio: 1/0.5;
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
     }
-    
-    .displayResetSubmit{
+
+    .displayResetSubmit {
         width: 60%;
         display: flex;
         justify-content: space-between;
     }
-    
+
     label {
         text-align: left;
     }
@@ -115,39 +191,93 @@ label .password-icon {
 
 /*Desktop*/
 @media (min-width: 1024px) {
-
     section {
         width: 100%;
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
     }
-    
-    .login, .signup {
+
+    .login,
+    .signup {
         text-align: center;
         max-width: 50%;
+        min-height: 500px;
     }
     .separator {
         width: 1%;
         aspect-ratio: 1/100;
-        background-color:  $color-primary;
+        background-color: $color-tertiary;
     }
-    
-    .displayLogin, .displaySignup {
+
+    input {
+        background: linear-gradient(
+            -100deg,
+            $color-primary,
+            $color-tertiary,
+            $color-secondary
+        );
+        background-size: 200% 200%;
+        animation: gradient 15s ease infinite;
+        cursor: grab;
+    }
+
+    input[type='text'] {
+        width: 40%;
+        transition: ease-in-out, width 0.35s ease-in-out;
+    }
+
+    input[type='email'] {
+        width: 50%;
+        transition: ease-in-out, width 0.35s ease-in-out;
+    }
+
+    input[type='password'] {
+        width: 60%;
+        transition: ease-in-out, width 0.35s ease-in-out;
+    }
+
+    input[type='text']:focus,
+    input[type='email']:focus,
+    input[type='password']:focus {
         width: 100%;
-        aspect-ratio: 1/0.5;
+        background: $color-white;
+    }
+
+    input[type='reset']:active,
+    input[type='submit']:active {
+        cursor: grabbing;
+    }
+    .displayLogin,
+    .displaySignup {
+        width: 100%;
+        aspect-ratio: 1/1;
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
     }
-    
-    .displayResetSubmit{
+
+    .displayResetSubmit {
         width: 60%;
         display: flex;
         justify-content: space-between;
     }
-    
+
     label {
         text-align: left;
+        font-size: 2vw;
+    }
+    #nameSignUp::placeholder {
+        font-size: 1vw;
+    }
+    
+    #emailSignIn::placeholder,
+    #emailSignUp::placeholder {
+        font-size: 1vw;
+    }
+    
+    #passwordSignIn::placeholder,
+    #passwordSignUp::placeholder {
+        font-size: 1vw;
     }
 }

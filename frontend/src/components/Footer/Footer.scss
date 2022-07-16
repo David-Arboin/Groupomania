@@ -1,12 +1,14 @@
 @use '../../../src/styles/variables' as *;
 
+.footer{
+    background-color: $color-tertiary;
+}
 /*Smartphone*/
 @media (max-width: 426px) {
 
     .footer {
         width: 100%;
         aspect-ratio: 41/6;
-        background-color:  $color-primary;
     }
 }
 
@@ -16,7 +18,6 @@
     .footer {
         width: 100%;
         height: 100px;
-        background-color:  $color-primary;
     }
 }
 
@@ -25,7 +26,6 @@
     .footer {
         width: 100%;
         height: 200px;
-        background-color:  $color-primary;
     }
 }
     

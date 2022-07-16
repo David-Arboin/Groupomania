@@ -6,7 +6,6 @@ const path = require('path');
 //**********Création d'un post
 exports.createPost = (req, res, next) => {
     const postObject = req.body.post;
-  console.log(req.file)
 
     const post = new Post({
       userId: req.auth.userId,
@@ -16,8 +15,6 @@ exports.createPost = (req, res, next) => {
     post.save()
       .then(() => res.status(201).json({ message: 'Post enregistré !'}))
       .catch(error => res.status(400).json({ error }));
-console.log(post.createdAt)
-
 };
 
 //**********Modification d'un post
@@ -92,7 +89,6 @@ exports.getAllPosts = (req, res, next) => {
 
 //**********Likes
 exports.likePost = (req, res, next) => {
-  console.log(req.body.like)
 
 //--Si l'utilisateur ajoute un like
  if (req.body.like === 1) {
