@@ -224,7 +224,7 @@ const PostCard = (props) => {
                 })
         }
     }
-
+    console.log(name)
     //--Récupération de la saisie de textArea et de l'image
     const textAreaAndImage = useRef([])
     const addTextAreaAndImage = (el) => {
@@ -234,7 +234,18 @@ const PostCard = (props) => {
     return post.userId !== userId ? (
         <div className="displayPost">
             <div className="conteneur">
-                <h1 className="dispayNamePoster">Publié par : {post.name}</h1>
+                <h1 className="dispayNamePoster">Publié par : {name}</h1>
+
+                {post.updatedAt === post.createdAt.hour ? (
+                    <h1 className="dispayNamePoster">
+                        Publié le {post.createdAt.getFullYear}
+                    </h1>
+                ) : (
+                    <h1 className="dispayNamePoster">
+                        Mis à jour le {post.updatedAt}
+                    </h1>
+                )}
+
                 <div className="displayTextAndImage">
                     <div className="displayImage">
                         <img
@@ -308,6 +319,15 @@ const PostCard = (props) => {
         <div data-set={post._id} className="displayPost">
             <div className="conteneur">
                 <h1 className="dispayNamePoster">Votre post</h1>
+                {post.updatedAt === post.createdAt ? (
+                    <h1 className="dispayNamePoster">
+                        Publié le {post.createdAt}
+                    </h1>
+                ) : (
+                    <h1 className="dispayNamePoster">
+                        Mis à jour le {post.updatedAt}
+                    </h1>
+                )}
                 <div className="displayTextAndImage">
                     <div className="displayImage">
                         <img

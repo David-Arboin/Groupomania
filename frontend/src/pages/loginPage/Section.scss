@@ -14,7 +14,7 @@
 
 h1,
 label {
-    color: $color-tertiary;
+    color: $color-white;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -196,13 +196,27 @@ label .password-icon .fa-eye-slash {
         display: flex;
         justify-content: space-evenly;
         flex-wrap: wrap;
+        background-color: $color-tertiary;
     }
 
-    .login,
-    .signup {
+    .signUp,
+    .signIn {
         text-align: center;
-        max-width: 50%;
-        min-height: 500px;
+        margin-top: 5%;
+        border-radius: 5%;
+        background-color: $color-primary;
+        height: 40vw;
+        -webkit-box-shadow: 5px 5px 14px 8px $color-secondary;
+        box-shadow: 5px 5px 14px 8px $color-secondary;
+    }
+
+    .signIn{
+        width: 30%;
+
+    }
+
+    .signUp{
+        width: 32.5%
     }
     .separator {
         width: 1%;
@@ -219,7 +233,6 @@ label .password-icon .fa-eye-slash {
         );
         background-size: 200% 200%;
         animation: gradient 15s ease infinite;
-        cursor: grab;
     }
 
     input[type='text'] {
@@ -240,14 +253,15 @@ label .password-icon .fa-eye-slash {
     input[type='text']:focus,
     input[type='email']:focus,
     input[type='password']:focus {
-        width: 100%;
+        width: 80%;
         background: $color-white;
     }
 
-    input[type='reset']:active,
+ /*    input[type='reset']:active,
     input[type='submit']:active {
         cursor: grabbing;
-    }
+    } */
+    
     .displayLogin,
     .displaySignup {
         width: 100%;
@@ -255,6 +269,7 @@ label .password-icon .fa-eye-slash {
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
+        padding-left: 10%;
     }
 
     .displayResetSubmit {
@@ -270,12 +285,12 @@ label .password-icon .fa-eye-slash {
     #nameSignUp::placeholder {
         font-size: 1vw;
     }
-    
+
     #emailSignIn::placeholder,
     #emailSignUp::placeholder {
         font-size: 1vw;
     }
-    
+
     #passwordSignIn::placeholder,
     #passwordSignUp::placeholder {
         font-size: 1vw;
