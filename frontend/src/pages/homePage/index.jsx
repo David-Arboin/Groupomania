@@ -73,17 +73,78 @@ const addTextAreaAndImage = (el) => {
     e.preventDefault();
 
     const form = e.target;
+    console.log(form)
     const formData = new FormData();
-    formData.append('post', form[0].value);
-    formData.append('image', form[1].files[0]);
-    console.log(form[0].value);
-    console.log(form[1].files[0]);
-
     const requestOptionsCreate = {
       method: 'POST',
       headers: { Authorization: 'Bearer ' + token },
       body: formData,
     };
+
+    console.log(form[0].value);
+    console.log(form[1].files[0]);
+
+    if (form[0].value === '' && form[1].files[0] === undefined) {
+      alert('Vous avez oublié de saisir un texte et/ou un image')
+    } else if (form[0].value === '' && form[1].files[0] !== undefined) {
+      formData.append('image', form[1].files[0])
+    
+      fetch('http://localhost:8000/groupomania/posts', requestOptionsCreate)
+      .then((response) => response.json())
+      .then((data) => {
+        const requestOptions = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token,
+          },
+        };
+        const newArrayPosts = fetch(
+          'http://localhost:8000/groupomania/posts',
+          requestOptions
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            const posts = data.reverse()
+            setPosts(posts);
+            form.reset()
+          }
+          
+          );
+      })
+    }else if (form[0].value !== '' && form[1].files[0] === undefined) {
+      console.log('ICI')
+        formData.append('post', form[0].value)
+        fetch('http://localhost:8000/groupomania/posts', requestOptionsCreate)
+        .then((response) => response.json())
+        .then((data) => {
+          const requestOptions = {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: 'Bearer ' + token,
+            },
+          };
+          const newArrayPosts = fetch(
+            'http://localhost:8000/groupomania/posts',
+            requestOptions
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              const posts = data.reverse()
+              setPosts(posts);
+              form.reset()
+            }
+
+            );
+        })
+      
+      
+      }
+      else if (form[0].value !== '' && form[1].files[0] !== undefined) {
+          formData.append('post', form[0].value)
+          formData.append('image', form[1].files[0])
+
     fetch('http://localhost:8000/groupomania/posts', requestOptionsCreate)
       .then((response) => response.json())
       .then((data) => {
@@ -108,7 +169,7 @@ const addTextAreaAndImage = (el) => {
           );
       });
   };
-
+  }
 
   
   useEffect(() => {
