@@ -8,6 +8,7 @@ import Footer from './components/Footer/Footer.jsx'
 import NotFound from './components/NotFound/NotFound'
 import { Navigate } from 'react-router-dom'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { useState } from 'react'
 
 export const TokenContext = React.createContext()
 export const UserIdContext = React.createContext()
@@ -17,6 +18,7 @@ function App() {
     const [token, setToken] = React.useState()
     const [userId, setUserId] = React.useState()
     const [name, setName] = React.useState()
+    const [logout, setLogOut] = useState()
 
     return (
         <div className="App">
@@ -24,7 +26,7 @@ function App() {
                 <TokenContext.Provider value={[token, setToken]}>
                     <UserIdContext.Provider value={[userId, setUserId]}>
                         <NameContext.Provider value={[name, setName]}>
-                            <Header />
+                            <Header logout={logout} setLogOut={setLogOut} />
                             <Routes>
                                 <Route
                                     exact

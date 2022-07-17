@@ -1,3 +1,4 @@
+import '../homePage/SectionHomePage.scss'
 import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
@@ -18,6 +19,12 @@ const PostCard = (props) => {
     const [addLike, setAddLike] = useState(false)
 
     //*****************Modification d'un post */
+    //--Récupération de la saisie de textArea et de l'image
+    const textAreaAndImage = useRef([])
+    const addTextAreaAndImage = (el) => {
+        textAreaAndImage.current.push(el)
+    }
+
     const sendModification = (event) => {
         event.preventDefault()
         const form = event.target
@@ -53,8 +60,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            setPosts(data)
-                            if (data) {
+                            const posts = data.reverse()
+                            setPosts(posts)
+                            if (posts) {
                                 setModification(false)
                             }
                         })
@@ -81,8 +89,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            setPosts(data)
-                            if (data) {
+                            const posts = data.reverse()
+                            setPosts(posts)
+                            if (posts) {
                                 setModification(false)
                             }
                         })
@@ -110,8 +119,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            setPosts(data)
-                            if (data) {
+                            const posts = data.reverse()
+                            setPosts(posts)
+                            if (posts) {
                                 setModification(false)
                             }
                         })
@@ -190,7 +200,8 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            setPosts(data)
+                            const posts = data.reverse()
+                            setPosts(posts)
                         })
                 })
         } else {
@@ -219,16 +230,11 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            setPosts(data)
+                            const posts = data.reverse()
+                            setPosts(posts)
                         })
                 })
         }
-    }
-    console.log(name)
-    //--Récupération de la saisie de textArea et de l'image
-    const textAreaAndImage = useRef([])
-    const addTextAreaAndImage = (el) => {
-        textAreaAndImage.current.push(el)
     }
 
     return post.userId !== userId ? (
@@ -265,12 +271,14 @@ const PostCard = (props) => {
                             icon={faThumbsUp}
                             onClick={() => handleLike(post._id)}
                             className="likeOff"
+                            size="2x"
                         ></FontAwesomeIcon>
                     ) : (
                         <FontAwesomeIcon
                             icon={faThumbsUp}
                             onClick={() => handleLike(post._id)}
                             className="likeOn"
+                            size="2x"
                         ></FontAwesomeIcon>
                     )}
                     <p className="numberOfLikes">{post.likes}</p>
@@ -292,7 +300,7 @@ const PostCard = (props) => {
                     <div className="displayButtons">
                         <input
                             id={post._id}
-                            className="decoButton styleButton"
+                            className="styleButton"
                             type="submit"
                             name="envoyer"
                         ></input>
@@ -301,7 +309,7 @@ const PostCard = (props) => {
                             type="file"
                             ref={addTextAreaAndImage}
                             accept="image/png, image/jpeg"
-                            className="decoSelectFile styleButton"
+                            className="styleButton"
                             alt="Modifier l'image"
                             id="image"
                         ></input>

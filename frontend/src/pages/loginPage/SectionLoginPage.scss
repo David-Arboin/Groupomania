@@ -205,7 +205,7 @@ label .password-icon .fa-eye-slash {
         margin-top: 5%;
         border-radius: 5%;
         background-color: $color-primary;
-        height: 40vw;
+        height: 30vw;
         -webkit-box-shadow: 5px 5px 14px 8px $color-secondary;
         box-shadow: 5px 5px 14px 8px $color-secondary;
     }
@@ -256,20 +256,21 @@ label .password-icon .fa-eye-slash {
         width: 80%;
         background: $color-white;
     }
-
- /*    input[type='reset']:active,
-    input[type='submit']:active {
-        cursor: grabbing;
-    } */
     
     .displayLogin,
     .displaySignup {
         width: 100%;
-        aspect-ratio: 1/1;
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
         padding-left: 10%;
+    }
+
+    .displayLogin {
+        aspect-ratio: 1/0.7;
+    }
+    .displaySignup {
+        aspect-ratio: 1/0.7;
     }
 
     .displayResetSubmit {

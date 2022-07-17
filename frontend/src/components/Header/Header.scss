@@ -2,7 +2,28 @@
 
 .header
 {
+    width: 100%;
+    display: flex;
     background-color: $color-tertiary;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.displayHeaderLeft{
+    width: 10%;
+    aspect-ratio: 1/0.5;
+    display: flex;
+}
+.displayButtonLogout{
+    aspect-ratio: 1/0.5;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around
+}
+.buttonLogout{
+    color: white;
+    cursor: pointer;
 }
 
 /*Smartphone*/
@@ -46,14 +67,6 @@
 /*Desktop*/
 @media (min-width: 1024px) {
 
-    .header
-    {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100px;
-    }
     .displayHeader {
         width: auto;
         display: flex;
@@ -66,4 +79,5 @@
         text-align: center;
         width: 200px;
     }
+
 }

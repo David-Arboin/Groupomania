@@ -1,12 +1,12 @@
-import './Section.scss';
+import '../homePage/SectionHomePage.scss';
 import React, {
   useState,
   useEffect,
+  useNavigate,
   useParams,
   useContext,
   useCallback,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -15,11 +15,10 @@ import { UserIdContext } from '../../App';
 import { NameContext } from '../../App';
 import PostCard from './PostCart';
 
-/* import {TokenAndUserIdContext} from '../loginPage' */
 
 export default function Section() {
   const [users, setUsers] = useState(null);
-  const navigate = useNavigate();
+/*   const navigate = useNavigate(); */
 
   let [token, setToken] = React.useContext(TokenContext);
   let [userId, setUserId] = React.useContext(UserIdContext);
@@ -28,7 +27,21 @@ export default function Section() {
   const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState(null);
 
+
+
   //**************Affichage des posts
+
+/*   if (window.performance.getEntriesByType("navigation")){
+    console.log('ICI')  } */
+
+
+/* if (token === "" && userId === "" && name === ""){
+  const token = JSON.parse(localStorage.getItem("token"))
+  const userId = JSON.parse(localStorage.getItem("userId"))
+  const name = JSON.parse(localStorage.getItem("name"))
+
+  return {token, userId, name}
+} */
 
   const requestOptions = {
     method: 'GET',
@@ -43,71 +56,18 @@ export default function Section() {
     fetch('http://localhost:8000/groupomania/posts', requestOptions)
       .then((response) => response.json())
       .then((data) => {
-        setPosts(data);
+        const posts = data.reverse()
+        setPosts(posts);
         setIsLoading(false);
       });
   }, []);
 
-  const textAreaAndImage = useRef([]);
-  const addTextAreaAndImage = (el) => {
-    textAreaAndImage.current.push(el);
-  };
-
-  /* 
-   const fetchData = useCallback(
-      async (postsOrusers) => {
-          const requestOptions = {
-              method: 'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: 'Bearer ' + token,
-              },
-          }
-
-
-          const response = await fetch(
-              `http://localhost:8000/groupomania/${postsOrusers}/`,
-              requestOptions
-          )
-          if (response.ok === false) {
-              throw 'Une erreur est survenue lors de la requête'
-          }
-          const data = await response.json()
-          return data
-      },
-      [token]
-  ) 
-
-  /*     useEffect(() => {
-      const getPostsAndUsers = async () => {
-          try {
-              const posts = await fetchData('posts')
-              const users = await fetchData('users')
-
-              posts.forEach((post) => {
-                  users.forEach((emailAndName) => {
-                      if (
-                          post[emailAndName] === undefined &&
-                          post.userId === emailAndName._id
-                      ) {
-                          post.email = emailAndName.email
-                          post.name = emailAndName.name
-                      }
-                  })
-              })
-
-              setPosts(posts)
-              setUsers(users)
-          } catch (err) {
-              console.log(err)
-          }
-      }
-      if (token) {
-          getPostsAndUsers()
-      }
-  }, [token, fetchData]) */
-
 //****************Création d'un post */
+
+const textAreaAndImage = useRef([]);
+const addTextAreaAndImage = (el) => {
+  textAreaAndImage.current.push(el);
+};
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,20 +100,17 @@ export default function Section() {
         )
           .then((response) => response.json())
           .then((data) => {
-            setPosts(data);
-          });
+            const posts = data.reverse()
+            setPosts(posts);
+            form.reset()
+          }
+          
+          );
       });
   };
 
 
-  //--Déconnexion
-  const logout = (e) => {
-    setToken('');
-    setUserId('');
-    setName('');
-    navigate('/');
-  };
-
+  
   useEffect(() => {
     if (!posts) {
       setIsLoading(true);
@@ -169,14 +126,11 @@ export default function Section() {
   return isLoading ? (
     'Loading !'
   ) : (
-    <section className="displaySection">
-      <button onClick={logout} className="displayButtonLogout">
-        Déconnexion
-      </button>
+    <section className='displaySection'>
       <div className="displayCreatePost">
         <div className="hello">Bienvenue {name}</div>
         <div className="displayTitleCreatePost">
-          <h1>Créer un post</h1>
+          <h1 className='titleCreatePost'>Créer un post</h1>
         </div>
         <form onSubmit={handleSubmit}>
           <textarea
@@ -191,12 +145,12 @@ export default function Section() {
               name="image"
               type="file"
               accept="image/png, image/jpeg"
-              className="decoSelectFile styleButton"
+              className="styleButton"
               ref={addTextAreaAndImage}
               id="image"
             ></input>
             <input
-              className="decoButton styleButton"
+              className="styleButton"
               type="submit"
             ></input>
           </div>

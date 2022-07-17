@@ -1,15 +1,16 @@
 import React, { useRef, useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import './Section.scss'
+import '../loginPage/SectionLoginPage.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
+import { logout } from '../../App'
 
 
 export default function Section() {
-    // React States
+
     const [errorMessages, setErrorMessages] = useState({})
     const [signInInAndsignUpOrSignUp, setSignInInAndsignUpOrSignUp] =
         useState(true)
@@ -18,13 +19,13 @@ export default function Section() {
     let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
 
+    const [logout, setLogOut] = useState(false)
 
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
         email: "Ceci n'est pas une adresse mail valide",
         pass: 'Votre mot de passe doit contenir au minimum 10 caractères, un chiffre, une minuscule, une majusle et un caratère spécial',
         ok: '',
-        /* style: `{$color-alert}`, */
     }
 
     // Generate JSX code for error message
@@ -33,31 +34,11 @@ export default function Section() {
             <div className="error">{errorMessages.message}</div>
         )
 
-    /*     const renderErrorStyle = (name) => name === errorStyle.name */
-
     //--Récupération de la saisie des inputs de connexion d'un compte existant
     const inputsSignIn = useRef([])
     const addInputsSignIn = (el) => {
         inputsSignIn.current.push(el)
     }
-
-    /*     //--Réaction au onChange de l'identification (sign In)
-    const handleFormChange = (event) => {
-        event.preventDefault()
-
-        const email = inputsSignIn.current[0]
-        const password = inputsSignIn.current[1]
-
-        if (
-            (email.value !== '') &
-            !/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(email.value)
-        ) {
-            document.getElementById('emailSignIn').placeholder = setErrorStyle({
-                name: 'style',
-                style: errors.style,
-            })
-        }
-    } */
 
     //--Bouton Tout effacer pour resaisir le mail et le mot de passe sans avoir à les supprimer à "la main"
 
@@ -131,8 +112,11 @@ export default function Section() {
                     setName(data.name)
                     console.log(data.token)
                     console.log(data)
+                    localStorage.setItem("token", JSON.stringify(data.token))
+                    localStorage.setItem("userId", JSON.stringify(data.userId))
+                    localStorage.setItem("name", JSON.stringify(data.name))
                     if(data.userId === undefined){
-                        alert("Veuillez vous inscrire sur la partie de gauche")
+                        alert("Veuillez vous inscrire sur la partie de droite")
                     } else {
                         navigate('/homePage')
                     }
@@ -211,9 +195,9 @@ export default function Section() {
                 .then((data) => {
                     console.log(data)
                     alert("Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter")
+                    setSignInInAndsignUpOrSignUp(false)
 
                 })
-            setSignInInAndsignUpOrSignUp(false)
         }
      }
 
@@ -311,6 +295,12 @@ export default function Section() {
                     </div>
                 </form>
             </div>
+            <p className='messageTeamTechnique'>
+                Bienvenue sur le nouveau réseau social de Groupomania !
+                Vous utilisé la version bêta de l'application.
+                Si vous rencontrez des problèmes, merci de nous en faire part à support@groupomania.complet
+                Excellent journée.
+            </p>
         </section>
 
         ) : (
@@ -326,8 +316,7 @@ export default function Section() {
                     /* onChange={handleFormChange} */
                 >
                     <label>
-                        Email ou Nom complet ou pseudonyme ou n° sécu
-                        {/* : {this.state.name} */}
+                        Email
                     </label>
                     <label>
                         <input
@@ -335,8 +324,6 @@ export default function Section() {
                             type="text"
                             ref={addInputsSignIn}
                             id="emailSignIn"
-                            /* onChange={this.inputChange} */
-                            /*                             style={renderErrorStyle} */
                         />
                         <div className="password-icon">
                             <i className="fa-solid fa-eye"></i>
