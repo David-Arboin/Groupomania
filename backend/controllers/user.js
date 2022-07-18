@@ -22,7 +22,8 @@ exports.signup = (req, res, next) => {
                     const user = new User({//--Crée un nouvel utilisateur avec le mot de passe crypté, le nom et l'adresse mail passée dans le corps de la requête
                         name: req.body.name,
                         email: req.body.email,
-                        password: hash
+                        password: hash,
+                        isAdmin : false
                     })
                     user.save()//--Enregistrement de l'utilisateur dans la base de donnée et envoi de l'userId et du token au frontend
                         .then(() => res.status(200).json({

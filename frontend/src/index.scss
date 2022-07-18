@@ -1,17 +1,11 @@
-@use '../src/styles/variables' as *;
+@import "./styles/variables";
 
-body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
+@import "./styles/bases";
+@import "./styles/buttons";
+@import "./styles/loading__spinner";
+@import "./styles/setting";
+
+@import "./components/Header/header";
+@import "./pages/loginPage/loginPage";
+@import "./pages/homePage/homePage";
+

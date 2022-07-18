@@ -2,14 +2,15 @@
 const Post = require('../schemas/post');
 const fs = require('fs'); //--Donne accès aux fonctions qui permettent de modifier le système de fichier y compris les fonctions qui permettent de supprimer
 const path = require('path');
+require("dotenv").config()
 
 //**********Création d'un post
 exports.createPost = (req, res, next) => {
     const postObject = req.body.post;
-
     const post = new Post({
       userId: req.auth.userId,
       post: postObject,
+      name: req.body.name,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`//--Reconstruction de l'Url de l'image
     });
     post.save()
@@ -34,7 +35,7 @@ exports.modifyPost = (req, res, next) => {
                     error: new Error('Post non trouvée !')
                 })
             }
-            if (post.userId !== req.auth.userId) {
+            if (post.userId !== req.auth.userId && req.auth.userId !== process.env.adminUserId) {
                 return res.status(403).json({
                     error: new Error('Requête non autorisée !')
                 })
@@ -59,7 +60,7 @@ exports.deletePost = (req, res, next) => {
           if (!post) {
             return res.status(404).json({ message: 'Post non trouvée !' })
         }
-          if (post.userId !== req.auth.userId) {
+          if (post.userId !== req.auth.userId && req.auth.userId !== process.env.adminUserId) {
               return res.status(403).json({ message: 'Requête non autorisée !'})
           }else {
             const filename = post.imageUrl.split('/images/')[1];//--Ici, split renvoit un tableau composé de deux éléments. 1- Ce qu'il y avant /images/ et un deuxième élément avec ce qu'il y après /images/

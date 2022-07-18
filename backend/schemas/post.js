@@ -4,6 +4,7 @@ const mongooseErrors = require('mongoose-errors')//--Gestionnaire d'erreurs mong
 
 const postSchema = mongoose.Schema({
     userId : {type: String, required: true }, //-- l'identifiant MongoDB unique de l'utilisateur qui a créé le post
+    name : { type: String, required: true },
     post: {type: String, required: false }, //-- post
     imageUrl: {type: String, required: false }, //-- l'URL de l'image à téléchargée par l'utilisateur
     time: {type: Number, required: false }, //-- Time

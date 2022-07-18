@@ -1,9 +1,9 @@
-import '../homePage/SectionHomePage.scss'
 import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
-
 import { TokenContext, UserIdContext, NameContext } from '../../App'
+
+
 
 const PostCard = (props) => {
     const { post, setPosts } = props.data
@@ -60,7 +60,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.reverse()
+                            const posts = data.sort(function (a, b) {
+                                return a.createdAt - b.createdAt
+                            })
                             setPosts(posts)
                             if (posts) {
                                 setModification(false)
@@ -89,7 +91,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.reverse()
+                            const posts = data.sort(function (a, b) {
+                                return a.createdAt - b.createdAt
+                            })
                             setPosts(posts)
                             if (posts) {
                                 setModification(false)
@@ -119,7 +123,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.reverse()
+                            const posts = data.sort(function (a, b) {
+                                return a.createdAt - b.createdAt
+                            })
                             setPosts(posts)
                             if (posts) {
                                 setModification(false)
@@ -133,6 +139,7 @@ const PostCard = (props) => {
     const handleDelete = async (event) => {
         event.preventDefault()
         let target = event.target.id
+        console.log(target)
         const requestOptionsDelete = {
             method: 'DELETE',
             headers: { Authorization: 'Bearer ' + token },
@@ -200,7 +207,9 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.reverse()
+                            const posts = data.sort(function (a, b) {
+                                return a.createdAt - b.createdAt
+                            })
                             setPosts(posts)
                         })
                 })
@@ -230,28 +239,125 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.reverse()
+                            const posts = data.sort(function (a, b) {
+                                return a.createdAt - b.createdAt
+                            })
                             setPosts(posts)
                         })
                 })
         }
     }
 
-    return post.userId !== userId ? (
+    return post.userId === userId ||
+        name === process.env.REACT_APP_NAME ? (
+        modification ? (
+            <div className="displayPost">
+                <div className="conteneur">
+                    <h1 className="dispayNamePoster">
+                        Mode modification activé
+                    </h1>
+                    <form onSubmit={sendModification} className="displayTexteareaModificationMode">
+                        <textarea
+                            name="post"
+                            type="text"
+                            className="displayTextAreaToModif"
+                            ref={addTextAreaAndImage}
+                            placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
+                        ></textarea>
+                        <div className="displayButtons">
+                            <input
+                                id={post._id}
+                                className="styleButton"
+                                type="submit"
+                                name="envoyer"
+                            ></input>
+                            <input
+                                name="image"
+                                type="file"
+                                ref={addTextAreaAndImage}
+                                accept="image/png, image/jpeg"
+                                className="styleButton"
+                                alt="Modifier l'image"
+                                id="image"
+                            ></input>
+                            <button
+                                className="annulationPost styleButton"
+                                onClick={() => setModification(false)}
+                            >
+                                Annuler
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        ) : (
+            <div data-set={post._id} className="displayPost">
+                <div className="conteneur">
+                    <h1 className="dispayNamePoster">Votre post</h1>
+                    <h1 className="dispayNamePoster">{`Publié le ${new Date(
+                        post.createdAt
+                    ).toLocaleDateString('fr')} à ${new Date(
+                        post.createdAt
+                    ).toLocaleTimeString('fr')}`}</h1>
+                    <div className="displayTextAndImage">
+                        <div className="displayImage">
+                            <img
+                                src={post.imageUrl}
+                                alt=""
+                                align="right"
+                                className="image"
+                            />
+                            <p className="displayText">{post.post}</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="displayButtons">
+                    <button
+                        id={post._id}
+                        className="modifyPost styleButton"
+                        onClick={() => setModification(true)}
+                    >
+                        Modifier
+                    </button>
+
+                    <div className="displayLikes">
+                        <div className="displayLikesAndNumberLikes">
+                            {like === 1 ? (
+                                <FontAwesomeIcon
+                                    icon={faThumbsUp}
+                                    onClick={() => handleLike(post._id)}
+                                    className="likeOff"
+                                ></FontAwesomeIcon>
+                            ) : (
+                                <FontAwesomeIcon
+                                    icon={faThumbsUp}
+                                    onClick={() => handleLike(post._id)}
+                                    className="likeOn"
+                                ></FontAwesomeIcon>
+                            )}
+                            <p className="numberOfLikes">{post.likes}</p>
+                        </div>
+                    </div>
+
+                    <button
+                        id={post._id}
+                        className="deletePost styleButton"
+                        onClick={(e) => handleDelete(e)}
+                    >
+                        Supprimer
+                    </button>
+                </div>
+            </div>
+        )
+    ) : (
         <div className="displayPost">
             <div className="conteneur">
-                <h1 className="dispayNamePoster">Publié par : {name}</h1>
-
-                {post.updatedAt === post.createdAt.hour ? (
-                    <h1 className="dispayNamePoster">
-                        Publié le {post.createdAt.getFullYear}
-                    </h1>
-                ) : (
-                    <h1 className="dispayNamePoster">
-                        Mis à jour le {post.updatedAt}
-                    </h1>
-                )}
-
+                <h1 className="dispayNamePoster">Publié par : {post.name}</h1>
+                <h1 className="dispayNamePoster">
+                    {`Publié le ${new Date(post.createdAt).toLocaleDateString(
+                        'fr'
+                    )} à ${new Date(post.createdAt).toLocaleTimeString('fr')}`}
+                </h1>
                 <div className="displayTextAndImage">
                     <div className="displayImage">
                         <img
@@ -260,7 +366,7 @@ const PostCard = (props) => {
                             align="right"
                             className="image"
                         />
-                        <h1 className="displayText">{post.post}</h1>
+                        <p className="displayText">{post.post}</p>
                     </div>
                 </div>
             </div>
@@ -271,118 +377,18 @@ const PostCard = (props) => {
                             icon={faThumbsUp}
                             onClick={() => handleLike(post._id)}
                             className="likeOff"
-                            size="2x"
+                            size="4x"
                         ></FontAwesomeIcon>
                     ) : (
                         <FontAwesomeIcon
                             icon={faThumbsUp}
                             onClick={() => handleLike(post._id)}
                             className="likeOn"
-                            size="2x"
+                            size="4x"
                         ></FontAwesomeIcon>
                     )}
                     <p className="numberOfLikes">{post.likes}</p>
                 </div>
-            </div>
-        </div>
-    ) : modification ? (
-        <div className="displayPost">
-            <div className="conteneur">
-                <h1 className="dispayNamePoster">Mode modification activé</h1>
-                <form onSubmit={sendModification}>
-                    <textarea
-                        name="post"
-                        type="text"
-                        className="displayTextAreaToModif"
-                        ref={addTextAreaAndImage}
-                        placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
-                    ></textarea>
-                    <div className="displayButtons">
-                        <input
-                            id={post._id}
-                            className="styleButton"
-                            type="submit"
-                            name="envoyer"
-                        ></input>
-                        <input
-                            name="image"
-                            type="file"
-                            ref={addTextAreaAndImage}
-                            accept="image/png, image/jpeg"
-                            className="styleButton"
-                            alt="Modifier l'image"
-                            id="image"
-                        ></input>
-                        <button
-                            className="annulationPost styleButton"
-                            onClick={() => setModification(false)}
-                        >
-                            Annuler
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    ) : (
-        <div data-set={post._id} className="displayPost">
-            <div className="conteneur">
-                <h1 className="dispayNamePoster">Votre post</h1>
-                {post.updatedAt === post.createdAt ? (
-                    <h1 className="dispayNamePoster">
-                        Publié le {post.createdAt}
-                    </h1>
-                ) : (
-                    <h1 className="dispayNamePoster">
-                        Mis à jour le {post.updatedAt}
-                    </h1>
-                )}
-                <div className="displayTextAndImage">
-                    <div className="displayImage">
-                        <img
-                            src={post.imageUrl}
-                            alt=""
-                            align="right"
-                            className="image"
-                        />
-                        <h1 className="displayText">{post.post}</h1>
-                    </div>
-                </div>
-            </div>
-            <div className="displayButtons">
-                <button
-                    id={post._id}
-                    className="modifyPost styleButton"
-                    onClick={() => setModification(true)}
-                >
-                    Modifier
-                </button>
-
-                <div className="displayLikes">
-                    <div className="displayLikesAndNumberLikes">
-                        {like === 1 ? (
-                            <FontAwesomeIcon
-                                icon={faThumbsUp}
-                                onClick={() => handleLike(post._id)}
-                                className="likeOff"
-                            ></FontAwesomeIcon>
-                        ) : (
-                            <FontAwesomeIcon
-                                icon={faThumbsUp}
-                                onClick={() => handleLike(post._id)}
-                                className="likeOn"
-                            ></FontAwesomeIcon>
-                        )}
-                        <p className="numberOfLikes">{post.likes}</p>
-                    </div>
-                </div>
-
-                <button
-                    id={post._id}
-                    className="deletePost styleButton"
-                    onClick={(e) => handleDelete(e)}
-                >
-                    Supprimer
-                </button>
             </div>
         </div>
     )

@@ -1,16 +1,13 @@
 import React, { useRef, useState, useContext } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import '../loginPage/SectionLoginPage.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
-import { logout } from '../../App'
-
+import { LogInContext } from '../../App'
 
 export default function Section() {
-
     const [errorMessages, setErrorMessages] = useState({})
     const [signInInAndsignUpOrSignUp, setSignInInAndsignUpOrSignUp] =
         useState(true)
@@ -18,8 +15,7 @@ export default function Section() {
     let [token, setToken] = React.useContext(TokenContext)
     let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
-
-    const [logout, setLogOut] = useState(false)
+    let [login, setLogIn] = React.useContext(LogInContext)
 
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
@@ -112,21 +108,21 @@ export default function Section() {
                     setName(data.name)
                     console.log(data.token)
                     console.log(data)
-                    localStorage.setItem("token", JSON.stringify(data.token))
-                    localStorage.setItem("userId", JSON.stringify(data.userId))
-                    localStorage.setItem("name", JSON.stringify(data.name))
-                    if(data.userId === undefined){
-                        alert("Veuillez vous inscrire sur la partie de droite")
+                    localStorage.setItem('token', JSON.stringify(data.token))
+                    localStorage.setItem('userId', JSON.stringify(data.userId))
+                    localStorage.setItem('name', JSON.stringify(data.name))
+                    if (data.userId === undefined) {
+                        alert('Veuillez vous inscrire sur la partie de droite')
                     } else {
                         navigate('/homePage')
+                        setLogIn(true)
                     }
                 })
-                .catch (function(error) {
+                .catch(function (error) {
                     console.log('Il y a un problème de connexion')
                     alert('Il y a un problème de connexion')
                     navigate('/')
                 })
-
         }
     }
     //************************************SignUp
@@ -194,12 +190,13 @@ export default function Section() {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
-                    alert("Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter")
+                    alert(
+                        'Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter'
+                    )
                     setSignInInAndsignUpOrSignUp(false)
-
                 })
         }
-     }
+    }
 
     return signInInAndsignUpOrSignUp ? (
         <section>
@@ -209,20 +206,15 @@ export default function Section() {
                 <h1>Je suis ravis de déjà avoir un compte !</h1>
                 <h1>Je me connecte juste dessous</h1>
 
-                <form
-                    className="displayLogin"
-                    onSubmit={handleFormSignIn}
-                >
-                    <label>
-                        Email
-                    </label>
+                <form className="displayLogin" onSubmit={handleFormSignIn}>
+                    <label>Email</label>
                     <label>
                         <input
                             name="email"
                             type="email"
                             ref={addInputsSignIn}
                             id="emailSignIn"
-                            placeholder=''
+                            placeholder=""
                         />
                         <div className="password-icon">
                             <i className="fa-solid fa-eye"></i>
@@ -295,16 +287,14 @@ export default function Section() {
                     </div>
                 </form>
             </div>
-            <p className='messageTeamTechnique'>
-                Bienvenue sur le nouveau réseau social de Groupomania !
-                Vous utilisé la version bêta de l'application.
-                Si vous rencontrez des problèmes, merci de nous en faire part à support@groupomania.complet
-                Excellent journée.
+            <p className="messageTeamTechnique">
+                Bienvenue sur le nouveau réseau social de Groupomania ! Vous
+                utilisé la version bêta de l'application. Si vous rencontrez des
+                problèmes, merci de nous en faire part à
+                support@groupomania.complet Excellent journée.
             </p>
         </section>
-
-        ) : (
-        
+    ) : (
         <section>
             {/* *******************************************SignIn*************************************************  */}
             <div className="signIn">
@@ -315,9 +305,7 @@ export default function Section() {
                     onSubmit={handleFormSignIn}
                     /* onChange={handleFormChange} */
                 >
-                    <label>
-                        Email
-                    </label>
+                    <label>Email</label>
                     <label>
                         <input
                             name="email"

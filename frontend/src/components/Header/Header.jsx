@@ -1,5 +1,4 @@
-import './Header.scss'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import img from '../../images/icon-left-font-monochrome-white.png'
 import { useNavigate } from 'react-router-dom'
 
@@ -10,20 +9,22 @@ import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
 
+import { LogInContext } from '../../App'
+
 function Header() {
-    let [token, setToken] = React.useContext(TokenContext)
-    let [userId, setUserId] = React.useContext(UserIdContext)
-    let [name, setName] = React.useContext(NameContext)
+    let [token, setToken] = useContext(TokenContext)
+    let [userId, setUserId] = useContext(UserIdContext)
+    let [name, setName] = useContext(NameContext)
+    let [login, setLogIn] = useContext(LogInContext)
 
-    const [logOut, setLogOut] = useState()
+
     const navigate = useNavigate()
-
-
 
     //--Déconnexion
     const logout = (e) => {
         setToken('')
         setUserId('')
+        setLogIn(false)
         setName('')
         navigate('/')
     }
@@ -36,14 +37,15 @@ function Header() {
             </div>
             <div className="displayButtonLogout">
 
-            logOut ?
+            {login ?
                 <FontAwesomeIcon
                     icon={faPowerOff}
                     onClick={logout}
                     className="buttonLogout"
                     size="3x"
                 ></FontAwesomeIcon>
-             : ''
+             : ''}
+
             </div>
         </header>
     )
