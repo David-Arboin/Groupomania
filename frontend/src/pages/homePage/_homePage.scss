@@ -5,6 +5,9 @@
         font-size: 2.5vw;
 
     }
+    .displayTexteareaModificationMode{
+        width: 100%;
+    }
     .hello {
         color: $color-tertiary;
         font-size: 5vw;
@@ -29,6 +32,9 @@
     input[type="file"] {
         display: none;
     }
+    .widthButtonSendModification{
+width: 20vw;
+    }
     .widthButtonSelectImage{
         width: 25vw;
         aspect-ratio: 1/0.2;
@@ -36,6 +42,12 @@
     }
     .hidenChooseFolder{
        z-index: -1;
+    }
+    .widthButtonModify{
+        width: 20vw;
+    }
+    .widthButtonSendModification{
+        width: 25vw;
     }
     .displaySection {
         width: 100%;
@@ -194,10 +206,9 @@
         color: black;
         font-size: 1.5vw;
     }
-    .deletePost,
-    .modifyPost,
-    .annulationPost,
+
     input,
+    label,
     button {
         cursor: pointer;
     }

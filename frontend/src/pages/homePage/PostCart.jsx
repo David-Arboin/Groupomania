@@ -271,17 +271,19 @@ const PostCard = (props) => {
                                 type="submit"
                                 name="envoyer"
                             ></input>
+                            <label className="styleButton widthButtonSelectImage">
+                            Choisir une image
                             <input
                                 name="image"
                                 type="file"
                                 ref={addTextAreaAndImage}
                                 accept="image/png, image/jpeg"
-                                className="styleButton"
-                                alt="Modifier l'image"
+                                alt="image poster par un utilisateur"
                                 id="image"
                             ></input>
+                            </label>
                             <button
-                                className="annulationPost styleButton"
+                                className="styleButton"
                                 onClick={() => setModification(false)}
                             >
                                 Annuler
@@ -314,7 +316,7 @@ const PostCard = (props) => {
                 <div className="displayButtons">
                     <button
                         id={post._id}
-                        className="modifyPost styleButton"
+                        className="styleButton widthButtonModify"
                         onClick={() => setModification(true)}
                     >
                         Modifier
@@ -341,7 +343,7 @@ const PostCard = (props) => {
 
                     <button
                         id={post._id}
-                        className="deletePost styleButton"
+                        className="styleButton widthButtonSendModification"
                         onClick={(e) => handleDelete(e)}
                     >
                         Supprimer

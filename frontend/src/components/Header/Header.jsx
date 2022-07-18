@@ -9,23 +9,21 @@ import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
 
-import { LogInContext } from '../../App'
 
 function Header() {
     let [token, setToken] = useContext(TokenContext)
     let [userId, setUserId] = useContext(UserIdContext)
     let [name, setName] = useContext(NameContext)
-    let [login, setLogIn] = useContext(LogInContext)
-
+    console.log(token)
+    console.log(userId)
 
     const navigate = useNavigate()
 
     //--Déconnexion
     const logout = (e) => {
-        setToken('')
+        setToken(undefined)
         setUserId('')
-        setLogIn(false)
-        setName('')
+        setName(undefined)
         navigate('/')
     }
 
@@ -37,14 +35,14 @@ function Header() {
             </div>
             <div className="displayButtonLogout">
 
-            {login ?
+            {token === undefined && userId === '' ?
+                '' : 
                 <FontAwesomeIcon
                     icon={faPowerOff}
                     onClick={logout}
                     className="buttonLogout"
                     size="3x"
-                ></FontAwesomeIcon>
-             : ''}
+                ></FontAwesomeIcon>}
 
             </div>
         </header>

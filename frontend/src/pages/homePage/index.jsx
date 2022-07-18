@@ -205,6 +205,7 @@ export default function Section() {
                                 accept="image/png, image/jpeg"
                                 ref={addTextAreaAndImage}
                                 id="image"
+                                alt="image poster par un utilisateur"
                             ></input>
                         </label>
                         <input className="styleButton" type="submit"></input>

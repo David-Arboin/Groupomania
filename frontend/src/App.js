@@ -14,14 +14,11 @@ export const NameContext = React.createContext()
 export const LogInContext = React.createContext()
 
 function App() {
+
     const [token, setToken] = React.useState()
     const [userId, setUserId] = React.useState()
     const [name, setName] = React.useState()
-    const [login, setLogIn] = React.useState(false)
-    useEffect(() => {
-        // Met à jour le titre du document via l’API du navigateur
-        console.log({login});
-      }, [login])
+
 
     return (
         <div className="App">
@@ -29,7 +26,6 @@ function App() {
                 <TokenContext.Provider value={[token, setToken]}>
                     <UserIdContext.Provider value={[userId, setUserId]}>
                         <NameContext.Provider value={[name, setName]}>
-                            <LogInContext.Provider value={[login, setLogIn]}>
                                 <Header />
                                 <Routes>
                                     <Route
@@ -49,7 +45,6 @@ function App() {
                                     ></Route>
                                     <Route component={<NotFound />}></Route>
                                 </Routes>
-                            </LogInContext.Provider>
                         </NameContext.Provider>
                     </UserIdContext.Provider>
                 </TokenContext.Provider>

@@ -15,7 +15,9 @@ export default function Section() {
     let [token, setToken] = React.useContext(TokenContext)
     let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
-    let [login, setLogIn] = React.useContext(LogInContext)
+
+    console.log(token)
+    console.log(userId)
 
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
@@ -115,7 +117,6 @@ export default function Section() {
                         alert('Veuillez vous inscrire sur la partie de droite')
                     } else {
                         navigate('/homePage')
-                        setLogIn(true)
                     }
                 })
                 .catch(function (error) {
