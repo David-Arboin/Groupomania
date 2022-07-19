@@ -14,8 +14,6 @@ function Header() {
     let [token, setToken] = useContext(TokenContext)
     let [userId, setUserId] = useContext(UserIdContext)
     let [name, setName] = useContext(NameContext)
-    console.log(token)
-    console.log(userId)
 
     const navigate = useNavigate()
 

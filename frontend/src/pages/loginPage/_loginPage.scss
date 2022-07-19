@@ -9,11 +9,61 @@
         background-position: 0% 50%;
     }
 }
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='reset'],
+input[type='submit'] {
+    background: linear-gradient(
+        -100deg,
+        $color-primary,
+        $color-tertiary,
+        $color-secondary
+    );
+    background-size: 200% 200%;
+    animation: gradient 15s ease infinite;
+    padding: 0.5vw;
+    font-weight: bolder;
+    transition: ease-in-out, width 0.35s ease-in-out;
+}
 
+input[type='text'] {
+    width: 40%;
+}
+
+input[type='email'] {
+    width: 50%;
+}
+
+input[type='password'] {
+    width: 60%;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='password']:focus {
+    width: 80%;
+    background: $color-white;
+}
+
+input[type='reset']:focus-visible,
+input[type='submit']:focus-visible {
+    background: $color-black;
+    transform: scale(1.5);
+}
+input[type='reset'],
+input[type='submit'] {
+    color: $color-white;
+    border-radius: 0.5vw;
+}
 h1,
-label {
+label,
+.messageTeamTechnique {
     color: $color-white;
     font-family: 'Roboto', sans-serif;
+}
+.messageTeamTechnique {
+    text-align: justify;
 }
 
 #emailSignIn::placeholder,
@@ -22,14 +72,35 @@ label {
 #passwordSignIn::placeholder,
 #nameSignUp::placeholder,
 #passwordSignUp::placeholder {
-    color: $color-alert;
+    color: $color-black;
+}
+
+section {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    background-color: $color-tertiary;
 }
 
 .error {
     text-align: left;
     color: $color-alert;
 }
+.displayLogin,
+.displaySignup {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    padding-left: 10%;
+}
 
+.displayLogin {
+    aspect-ratio: 1/0.7;
+}
+.displaySignup {
+    aspect-ratio: 1/0.7;
+}
 label .password-icon {
     display: flex;
     align-items: center;
@@ -50,32 +121,56 @@ label .password-icon:hover {
 label .password-icon .fa-eye-slash {
     display: none;
 }
+h1,
+label {
+    font-size: 2vw;
+}
+.signUp,
+.signIn {
+    text-align: center;
+    margin-top: 5%;
+    border-radius: 5%;
+    background-color: $color-primary;
+    -webkit-box-shadow: 5px 5px 14px 8px $color-secondary;
+    box-shadow: 5px 5px 14px 8px $color-secondary;
+}
 
 /*Smartphone*/
 @media (max-width: 426px) {
     section {
-        width: 80%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
-        margin-left: 10%;
+        padding: 0 10% 0 10%;
     }
-
+    h1,
+    label {
+        font-size: 4vw;
+    }
+    html,
+    .App {
+        height: auto;
+    }
+    html,
+    .App {
+        background-color: $color-tertiary;
+    }
     .signUp,
     .signIn {
         text-align: center;
+        width: 100%;
+    }
+    .signIn {
+        height: 68vw;
+        margin-bottom: 5vw;
+    }
+    .signUp {
+        height: 78vw;
     }
 
-    input {
-        background: linear-gradient(
-            -100deg,
-            $color-primary,
-            $color-tertiary,
-            $color-secondary
-        );
-        background-size: 200% 200%;
-        animation: gradient 15s ease infinite;
-        cursor: grab;
+    .widthTextNameOrPseeudo {
+        font-size: 5vw;
     }
 
     input[type='text'] {
@@ -123,7 +218,7 @@ label .password-icon .fa-eye-slash {
     }
 
     .displayResetSubmit {
-        width: 75%;
+        width: 90%;
         display: flex;
         justify-content: space-between;
         margin: 10% 0 10% 0;
@@ -131,6 +226,10 @@ label .password-icon .fa-eye-slash {
 
     label {
         text-align: left;
+    }
+    .numberOfLikes{
+        font-size: 3.5vw;
+        font-weight: bolder;
     }
 }
 
@@ -170,10 +269,20 @@ label .password-icon .fa-eye-slash {
     .displayLogin,
     .displaySignup {
         width: 100%;
-        aspect-ratio: 1/0.5;
+        aspect-ratio: 1/0.75;
         display: flex;
         justify-content: space-evenly;
         flex-direction: column;
+    }
+    .signUp,
+    .signIn {
+        text-align: center;
+        width: 40%;
+    }
+    .signIn,
+    .signUp {
+        height: 40vw;
+        margin-bottom: 5vw;
     }
 
     .displayResetSubmit {
@@ -181,7 +290,26 @@ label .password-icon .fa-eye-slash {
         display: flex;
         justify-content: space-between;
     }
+    .displayResetSubmit {
+        width: 90%;
+    }
+    #nameSignUp::placeholder {
+        font-size: 1.5vw;
+    }
 
+    #emailSignIn::placeholder,
+    #emailSignUp::placeholder {
+        font-size: 2vw;
+    }
+
+    #passwordSignIn::placeholder,
+    #passwordSignUp::placeholder {
+        font-size: 1.5vw;
+    }
+    .messageTeamTechnique{
+        font-size: 3vw;
+        width: 80%;
+    }
     label {
         text-align: left;
     }
@@ -189,86 +317,33 @@ label .password-icon .fa-eye-slash {
 
 /*Desktop*/
 @media (min-width: 1024px) {
-    section {
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        flex-wrap: wrap;
-        background-color: $color-tertiary;
-    }
-
-    .signUp,
-    .signIn {
-        text-align: center;
-        margin-top: 5%;
-        border-radius: 5%;
-        background-color: $color-primary;
-        height: 30vw;
-        -webkit-box-shadow: 5px 5px 14px 8px $color-secondary;
-        box-shadow: 5px 5px 14px 8px $color-secondary;
-    }
-
-    .signIn{
-        width: 30%;
-
-    }
-
-    .signUp{
-        width: 32.5%
+    h1,
+    label {
+        font-size: 1.5vw;
     }
     .separator {
         width: 1%;
         aspect-ratio: 1/100;
         background-color: $color-tertiary;
     }
-
-    input {
-        background: linear-gradient(
-            -100deg,
-            $color-primary,
-            $color-tertiary,
-            $color-secondary
-        );
-        background-size: 200% 200%;
-        animation: gradient 15s ease infinite;
+    section {
+        flex-wrap: wrap;
     }
 
-    input[type='text'] {
-        width: 40%;
-        transition: ease-in-out, width 0.35s ease-in-out;
+    .signIn {
+        width: 30%;
+        height: 30vw;
     }
 
-    input[type='email'] {
-        width: 50%;
-        transition: ease-in-out, width 0.35s ease-in-out;
+    .signUp {
+        width: 32.5%;
+        height: 30vw;
     }
 
-    input[type='password'] {
-        width: 60%;
-        transition: ease-in-out, width 0.35s ease-in-out;
-    }
-
-    input[type='text']:focus,
-    input[type='email']:focus,
-    input[type='password']:focus {
-        width: 80%;
-        background: $color-white;
-    }
-    
-    .displayLogin,
-    .displaySignup {
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        flex-direction: column;
-        padding-left: 10%;
-    }
-
-    .displayLogin {
-        aspect-ratio: 1/0.7;
-    }
-    .displaySignup {
-        aspect-ratio: 1/0.7;
+    .input:focus-visible {
+        border: 2px solid black;
+        padding: 10px;
+        border-radius: 10px;
     }
 
     .displayResetSubmit {
@@ -293,5 +368,9 @@ label .password-icon .fa-eye-slash {
     #passwordSignIn::placeholder,
     #passwordSignUp::placeholder {
         font-size: 1vw;
+    }
+    .messageTeamTechnique{
+        font-size: 3vw;
+        width: 80%;
     }
 }

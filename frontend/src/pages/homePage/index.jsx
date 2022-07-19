@@ -41,8 +41,8 @@ export default function Section() {
         fetch('http://localhost:8000/groupomania/posts', requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                const posts = data.sort(function (a, b) {
-                    return a.createdAt - b.createdAt
+                const posts = data.slice().sort(function (a, b) {
+                    return new Date(b.createdAt) - new Date(a.createdAt)
                 })
                 setPosts(posts)
                 setIsLoading(false)
@@ -61,7 +61,6 @@ export default function Section() {
         e.preventDefault()
 
         const form = e.target
-        console.log(form)
         const formData = new FormData()
         const requestOptionsCreate = {
             method: 'POST',
@@ -76,6 +75,7 @@ export default function Section() {
             alert('Vous avez oublié de saisir un texte et/ou un image')
         } else if (form[0].value === '' && form[1].files[0] !== undefined) {
             formData.append('image', form[1].files[0])
+            formData.append('post', "Aucun texte saisie")
             formData.append('name', name)
 
             fetch(
@@ -97,8 +97,8 @@ export default function Section() {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                             form.reset()
@@ -127,8 +127,8 @@ export default function Section() {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                             form.reset()
@@ -158,8 +158,8 @@ export default function Section() {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                             form.reset()
@@ -184,7 +184,7 @@ export default function Section() {
     ) : (
         <section className="displaySection">
             <div className="displayCreatePost">
-                <div className="hello">Bienvenue {name}</div>
+                <div className="hello">Bienvenue {name} 🙂</div>
                 <div className="displayTitleCreatePost">
                     <h1 className="titleCreatePost">Créer un post</h1>
                 </div>
@@ -197,8 +197,7 @@ export default function Section() {
                         placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
                     ></textarea>
                     <div className="displayinputImageAndButtonPublish">
-                        <label className="styleButton widthButtonSelectImage">
-                            Choisir une image
+                        
                             <input
                                 name="image"
                                 type="file"
@@ -206,8 +205,7 @@ export default function Section() {
                                 ref={addTextAreaAndImage}
                                 id="image"
                                 alt="image poster par un utilisateur"
-                            ></input>
-                        </label>
+                            />
                         <input className="styleButton" type="submit"></input>
                     </div>
                 </form>

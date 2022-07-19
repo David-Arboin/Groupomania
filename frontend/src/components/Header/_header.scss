@@ -7,18 +7,7 @@
     justify-content: space-between;
 
 }
-.displayHeaderLeft{
-    width: 10%;
-    aspect-ratio: 1/0.5;
-    display: flex;
-}
-.displayButtonLogout{
-    aspect-ratio: 1/0.5;
-    width: 10%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around
-}
+
 .buttonLogout{
     color: white;
     cursor: pointer;
@@ -32,17 +21,24 @@
         width: 100%;
         display: flex;
         justify-content: center;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        align-items: baseline;
         aspect-ratio: 10/1;
         font-size: 3vw;
         padding-bottom: 2vw;
+    }
+    .displayHeader{
+        display: flex;
+        justify-content: center;
     }
     header img
     {
         text-align: center;
         width: 50%;
         margin-top: 2.5%;
+    }
+    .displayButtonLogout{
+        margin: 0 2vw 0 2vw;
     }
 }
 
@@ -52,30 +48,50 @@
     {
         width: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         height: 100px;
     }
     header img
     {
         text-align: center;
+        width: 25vw;
     }
 }
 
 /*Desktop*/
 @media (min-width: 1024px) {
 
+    .header{
+        height: 10vw;
+    }
     .displayHeader {
         width: auto;
         display: flex;
         justify-content: space-around;
         align-items: center;
-
+        height: 100%;
+    }
+    .displayHeaderLeft{
+        width: 10%;
+        aspect-ratio: 1/0.5;
+        display: flex;
     }
     header img
     {
         text-align: center;
-        width: 200px;
+        width: 20vw;
     }
-
+    .displayButtonLogout{
+        aspect-ratio: 1/0.5;
+        width: 10%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around
+    }
+.buttonLogout:focus-visible{
+    border: 2px solid black;
+    padding: 10px;
+    border-radius: 10px;
+}
 }

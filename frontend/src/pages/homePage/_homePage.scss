@@ -1,215 +1,469 @@
-@media (min-width: 1024px) {
+.dispayNamePoster {
+    color: $color-secondary;
+}
+.displayTexteareaModificationMode {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.hello {
+    color: $color-tertiary;
+    text-align: center;
+}
+.styleButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-tertiary;
+    border-radius: 6vw;
+    width: 20%;
+    aspect-ratio: 3/1;
+    box-shadow: 2px 9px 15px -7px rgba(0, 0, 0, 0.75);
+    font-size: 3vw;
+    color: $color-white;
+
+    background-color: $color-primary;
+
+}
+
+.widthButtonSelectImage {
+    cursor: pointer;
+}
+.hidenChooseFolder {
+    z-index: -1;
+}
+
+.displaySection {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: $color-secondary;
+}
+
+.like {
+    cursor: pointer;
+}
+
+.likeOff {
+    color: $color-white;
+}
+
+.likeOn {
+    color: $color-secondary;
+}
+
+.likeOff:focus-visible,
+.likeOn:focus-visible {
+    transform: scale(1.5);
+}
+
+.numberOfLikes {
+    aspect-ratio: 1/1;
+    background-color: $color-secondary;
+    border-radius: 10%;
+    font-weight: bolder;
+    text-align: center;
+}
+.displayLikes {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.displayLikesAndNumberLikes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.displayLikesAndNumberLikes:focus-visible {
+    border: 2px solid $color-secondary;
+}
+.displayCreatePost {
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.displayTitleCreatePost {
+    display: flex;
+}
+.titleCreatePost {
+    color: $color-tertiary;
+}
+.displayTextArea {
+    display: flex;
+    min-width: 100%;
+}
+.displayTextAreaToModif {
+    display: flex;
+    min-width: 90%;
+}
+.displayTextAndImage {
+    width: 80%;
+}
+.displayinputImageAndButtonPublish {
+    display: flex;
+    justify-content: space-between;
+}
+.image {
+    float: left;
+    object-fit: cover;
+    width: 60%;
+}
+.displayImage {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    min-width: 100%;
+}
+.displayText {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80%;
+    max-width: 100%;
+    min-height: 10vw;
+    max-height: 30vw;
+    border: 2px solid white;
+    color: white;
+    white-space: normal;
+    border-radius: 2vw;
+    overflow: scroll;
+    padding: 3%;
+    text-align: justify;
+}
+.displayButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.displayPosts {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+    border-radius: 1%;
+    justify-content: center;
+}
+.displayPost {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: $color-tertiary;
+    margin-bottom: 5vw;
+
+}
+.conteneurUser {
+    width: 100%;
+    border: 2px solid $color-tertiary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.conteneur {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+img {
+    width: 20%;
+    border-radius: 5vw;
+}
+::placeholder {
+    color: black;
+}
+textarea {
+    color: black;
+}
+
+textarea:focus-visible {
+    border: 5px solid black;
+}
+#image:focus-visible {
+    transform: scale(1.5);
+    height: 50%;
+}
+button:focus-visible {
+    transform: scale(1.5);
+}
+input,
+label,
+button {
+    cursor: pointer;
+}
+
+/*Smartphone*/
+@media (max-width: 426px) {
+    section {
+        margin-left: 0;
+    }
     .dispayNamePoster {
-        color: $color-secondary;
         margin: 2vw 0 2vw 0;
         font-size: 2.5vw;
-
     }
-    .displayTexteareaModificationMode{
-        width: 100%;
+    .titleCreatePost {
+        font-size: 5vw;
     }
     .hello {
-        color: $color-tertiary;
-        font-size: 5vw;
-        text-align: center;
-    }
-    .styleButton {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(
-            270deg,
-            $color-secondary 1%,
-            $color-primary
-        );
-        color: $color-tertiary;
-        border-radius: 6vw;
-        width: 20%;
-        aspect-ratio: 3/1;
-        box-shadow: 2px 9px 15px -7px rgba(0, 0, 0, 0.75);
-        font-size: 3vw;
-    }
-    input[type="file"] {
-        display: none;
-    }
-    .widthButtonSendModification{
-width: 20vw;
-    }
-    .widthButtonSelectImage{
-        width: 25vw;
-        aspect-ratio: 1/0.2;
-        cursor: pointer;
-    }
-    .hidenChooseFolder{
-       z-index: -1;
-    }
-    .widthButtonModify{
-        width: 20vw;
-    }
-    .widthButtonSendModification{
-        width: 25vw;
-    }
-    .displaySection {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background-color: $color-secondary;
-    }
-    #file-upload-button {
-        display: none;
-    }
-    .like {
-        cursor: pointer;
+        font-size: 8vw;
+        margin-top: 5vw;
     }
 
-    .likeOff {
-        color: white;
+    .styleButton {
+        border-radius: 6vw;
+        font-size: 4vw;
         width: 30%;
-        font-size: 2vw;
+        box-shadow: 2px 9px 15px -7px rgba(0, 0, 0, 0.75);
+    }
+    input[type='file'] {
+        width: 115px;
+    }
+
+    .widthButtonSendModification {
+        width: 10vw;
+    }
+    .widthButtonSelectImage {
+        width: 15vw;
+        aspect-ratio: 1/0.5;
+    }
+    .hidenChooseFolder {
+        z-index: -1;
+    }
+    .widthButtonModify {
+        width: 20vw;
+    }
+    .widthButtonSendModification {
+        width: 25vw;
+    }
+    .displayLikes {
+        width: 60%;
+    }
+    .dispayNamePoster {
+        font-size: 4vw;
+    }
+    .displayLikesAndNumberLikes {
+        width: 40%;
+    }
+    .numberOfLikes {
+        width: 5vw;
+        margin-left: 2.5vw;
+    }
+    .displayTextArea {
+        min-height: 10vw;
+        border-radius: 2vw;
+    }
+    .displayTextAreaToModif {
+        min-width: 90%;
+        min-height: 10vw;
+        border-radius: 2vw;
+        margin: 0 0 5% 0;
+    }
+    .displayPost {
+        border-radius: 5vw;
+        margin-top: 5vw;
+        align-items: center;
+    }
+    .displayinputImageAndButtonPublish {
+        margin: 5vw 0 5vw 0;
+    }
+    .displayButtons {
+        width: 90%;
+        margin-bottom: 5%;
+    }
+    .fontSizeAnnulation {
+        font-size: 3.5vw;
+    }
+    .fontSizeSend {
+        font-size: 3vw;
+    }
+        .likeOff {
+        font-size: 5vw;
     }
 
     .likeOn {
-        color: $color-secondary;
-        width: 50%;
-        font-size: 2vw;
+        font-size: 5vw;
+    }
+}
 
+/*Tablette*/
+@media (min-width: 426px) and (max-width: 1023px) {
+    .dispayNamePoster {
+        margin: 2vw 0 2vw 0;
+        font-size: 2.5vw;
     }
-    .numberOfLikes {
+
+    .hello {
+        font-size: 5vw;
+        margin-top: 3vw;
+    }
+    .styleButton {
+        border-radius: 6vw;
         width: 20%;
-        aspect-ratio: 1/1;
-        background-color: $color-secondary;
-        border-radius: 10%;
-        font-size: 1.5vw;
-        font-weight: bolder;
-        text-align: center;
-    }
-    .displayLikes {
-        display: flex;
-        justify-content: space-around;
-        width: 100%;
-    }
-    .displayLikesAndNumberLikes {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 15%;
-    }
-    .displayCreatePost {
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        margin: 20px 0 20px 0;
-    }
-    .displayTitleCreatePost {
-        display: flex;
+        box-shadow: 2px 9px 15px -7px rgba(0, 0, 0, 0.75);
     }
     .titleCreatePost {
-        color: $color-tertiary;
-        font-size: 1.5vw;
-        margin-bottom: 1vw;
+        font-size: 3vw;
     }
-    .displayTextArea {
-        display: flex;
-        min-width: 100%;
-        min-height: 200px;
-        border-radius: 20px;
+    input[type='file'] {
+        width: 115px;
     }
-    .displayTextAreaToModif {
-        display: flex;
-        min-width: 80%;
-        min-height: 200px;
-        border-radius: 20px;
-        margin: 0 0 5% 10%;
+    .widthButtonSendModification {
+        width: 10vw;
     }
-    .displayTextAndImage {
-        width: 80%;
+    .widthButtonSelectImage {
+        width: 15vw;
+        aspect-ratio: 1/0.5;
     }
-    .displayinputImageAndButtonPublish {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
+    .hidenChooseFolder {
+        z-index: -1;
     }
-    .image {
-        float: left;
-        margin-right: 10px;
-        margin: 5px;
-        border-radius: 30px;
-        object-fit: cover;
-        width: 60%;
+    .widthButtonModify {
+        width: 20vw;
     }
-    .displayImage {
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        align-items: center;
-        min-width: 100%;
-        min-height: 200px;
-    }
-    .displayText {
-        display: flex;
-        justify-content: flex-start;
-        flex-direction: column;
-        align-items: center;
-        max-width: 100%;
-        border: 2px solid white;
-        border-radius: 20px;
-        color: white;
-        white-space: normal;
-        font-size: 2.5vw;
-        padding: 2vw;
-        margin: 2vw 0 2vw 0;
-    }
-    .displayButtons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        margin: 0px 20px 20px 20px;
+    .widthButtonSendModification {
+        width: 25vw;
     }
 
-    .displayPosts {
-        display: flex;
-        width: 80%;
-        margin-bottom: 50px;
-        flex-direction: column;
-        border-radius: 1%;
-        justify-content: center;
-    }
-    .displayPost {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-bottom: 20px;
-        background-color: $color-tertiary;
-        border-radius: 30px;
-    }
-    .conteneurUser {
-        width: 100%;
-        border: 2px solid $color-tertiary;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .conteneur {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    img {
-        width: 20%;
+    .displayTextArea {
+        min-height: 20vw;
+        border-radius: 5vw;
+        padding: 2vw;
+        font-size: 3vw;
     }
     ::placeholder {
-        color: black;
-        font-size: 1.5vw;
+        font-size: 3vw;
+        padding-left: 1.5vw;
+    }
+    .displayTextAreaToModif {
+        min-width: 80%;
+        min-height: 200px;
+        border-radius: 2px;
+        margin: 0 0 5% 10%;
+    }
+.displayText{
+    font-size: 3vw;
+}
+    .displayinputImageAndButtonPublish {
+        margin: 2.5vw 0 2.5vw 0;
+    }
+      .displayPost {
+        border-radius: 5vw;
+        margin-bottom: 5vw;
+        align-items: center;
+    }
+    .displayButtons {
+        width: 90%;
+    }
+    .displayLikesAndNumberLikes {
+        width: 20vw;
+    }
+    .numberOfLikes {
+        width: 5vw;
+        font-size: 4vw;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .likeOff {
+        font-size: 5vw;
     }
 
-    input,
-    label,
-    button {
-        cursor: pointer;
+    .likeOn {
+        font-size: 5vw;
+    }
+}
+
+/*Desktop*/
+@media (min-width: 1024px) {
+    .dispayNamePoster {
+        margin: 2vw 0 2vw 0;
+        font-size: 2.5vw;
+    }
+    .displayCreatePost,
+    .displayPosts {
+        width: 80%;
+    }
+    .hello {
+        font-size: 5vw;
+    }
+    .styleButton {
+        border-radius: 6vw;
+        width: 20%;
+        box-shadow: 2px 9px 15px -7px rgba(0, 0, 0, 0.75);
+    }
+    input[type='file'] {
+        width: 2vw;
+    }
+    .widthButtonSendModification {
+        width: 10vw;
+    }
+    .widthButtonSelectImage {
+        width: 15vw;
+        aspect-ratio: 1/0.5;
+    }
+    .hidenChooseFolder {
+        z-index: -1;
+    }
+    .widthButtonModify {
+        width: 20vw;
+    }
+    .widthButtonSendModification {
+        width: 25vw;
+    }
+    ::placeholder {
+        font-size: 1.5vw;
+        padding-left: 1.5vw;
+    }
+    .displayTextArea {
+        min-height: 10vw;
+        border-radius: 2vw;
+        font-size: 1.5vw;
+        padding-left: 1.5vw;
+    }
+    .displayTextAreaToModif {
+        min-width: 80%;
+        min-height: 200px;
+        border-radius: 2px;
+        margin: 0 0 5% 10%;
+    }
+    .displayLikesAndNumberLikes{
+        width: 30%;
+    }
+.displayText{
+    font-size: 3vw;
+}
+.numberOfLikes{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2vw;
+}
+.displayButtons{
+    width: 90%;
+}
+    .displayinputImageAndButtonPublish {
+        margin: 1vw 0 3vw 0;
+    }
+    input[type='file'] {
+        width: 120px;
+    }
+    .displayPost {
+        border-radius: 5vw;
+        align-items: center;
+    }
+    .likeOff {
+        font-size: 2.5vw;
+    }
+
+    .likeOn {
+        font-size: 2.5vw;
     }
 }

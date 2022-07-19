@@ -16,9 +16,9 @@ export default function Section() {
     let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
 
-    console.log(token)
-    console.log(userId)
-
+    setToken(undefined)
+    setUserId('')
+    
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
         email: "Ceci n'est pas une adresse mail valide",
@@ -253,7 +253,7 @@ export default function Section() {
                 <h1>Je m'inscrit en un éclair</h1>
 
                 <form className="displaySignup" onSubmit={handleFormSignUp}>
-                    <label type="name">Nom complet ou pseudonyme</label>
+                    <label type="name" className='widthTextNameOrPseeudo'>Nom complet ou pseudonyme</label>
                     <input
                         name="name"
                         type="text"

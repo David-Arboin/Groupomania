@@ -60,8 +60,8 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                             if (posts) {
@@ -91,8 +91,8 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                             if (posts) {
@@ -123,8 +123,8 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                             if (posts) {
@@ -163,7 +163,10 @@ const PostCard = (props) => {
                 )
                     .then((response) => response.json())
                     .then((data) => {
-                        setPosts(data)
+                        const posts = data.slice().sort(function (a, b) {
+                            return new Date(b.createdAt) - new Date(a.createdAt)
+                        })
+                        setPosts(posts)
                     })
             })
     }
@@ -207,8 +210,8 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                         })
@@ -239,8 +242,8 @@ const PostCard = (props) => {
                     )
                         .then((response) => response.json())
                         .then((data) => {
-                            const posts = data.sort(function (a, b) {
-                                return a.createdAt - b.createdAt
+                            const posts = data.slice().sort(function (a, b) {
+                                return new Date(b.createdAt) - new Date(a.createdAt)
                             })
                             setPosts(posts)
                         })
@@ -267,12 +270,10 @@ const PostCard = (props) => {
                         <div className="displayButtons">
                             <input
                                 id={post._id}
-                                className="styleButton"
+                                className="styleButton fontSizeSend"
                                 type="submit"
                                 name="envoyer"
                             ></input>
-                            <label className="styleButton widthButtonSelectImage">
-                            Choisir une image
                             <input
                                 name="image"
                                 type="file"
@@ -280,10 +281,9 @@ const PostCard = (props) => {
                                 accept="image/png, image/jpeg"
                                 alt="image poster par un utilisateur"
                                 id="image"
-                            ></input>
-                            </label>
+                            />
                             <button
-                                className="styleButton"
+                                className="styleButton fontSizeAnnulation"
                                 onClick={() => setModification(false)}
                             >
                                 Annuler
@@ -324,7 +324,7 @@ const PostCard = (props) => {
 
                     <div className="displayLikes">
                         <div className="displayLikesAndNumberLikes">
-                            {like === 1 ? (
+                            {!post.usersLiked.includes(userId) ? (
                                 <FontAwesomeIcon
                                     icon={faThumbsUp}
                                     onClick={() => handleLike(post._id)}
