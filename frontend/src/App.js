@@ -1,12 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Header from './components/Header/Header.jsx'
 import LoginPage from './pages/loginPage/index.jsx'
 import HomePage from './pages/homePage/index.jsx'
 import NotFound from './components/NotFound/NotFound'
 import { Navigate } from 'react-router-dom'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 
 export const TokenContext = React.createContext()
 export const UserIdContext = React.createContext()

@@ -1,34 +1,23 @@
+/* eslint-disable */
+
 import React, {
     useState,
-    useEffect,
-    useNavigate,
-    useParams,
-    useContext,
-    useCallback,
+    useEffect
 } from 'react'
 import { useRef } from 'react'
-import ReactDOM from 'react-dom'
-
 import { TokenContext } from '../../App'
-import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
 import PostCard from './PostCart'
 import Swal from 'sweetalert2'
 
 export default function Section() {
-    const [users, setUsers] = useState(null)
     const SwalWelcome = require('sweetalert2')
     
-    /*   const navigate = useNavigate(); */
-
     let [token, setToken] = React.useContext(TokenContext)
-    let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
 
     const [isLoading, setIsLoading] = useState(true)
-    const [errorMessage, setErrorMessage] = useState("");
     const [posts, setPosts] = useState(null)
-    const [user, setUser] = useState(null)
 
     //**************Affichage des posts
 

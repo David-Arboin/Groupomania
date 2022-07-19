@@ -1,12 +1,10 @@
-import React, { useRef, useState, useContext } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+/* eslint-disable */
+import React, { useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { } from '@fortawesome/react-fontawesome'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
-import { LogInContext } from '../../App'
-import Swal from 'sweetalert2'
 
 
 export default function Section() {

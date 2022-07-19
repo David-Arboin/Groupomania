@@ -1,4 +1,6 @@
-import React, { useState, useContext } from 'react'
+/* eslint-disable */
+
+import React, { useContext } from 'react'
 import img from '../../images/icon-left-font-monochrome-white.png'
 import { useNavigate } from 'react-router-dom'
 
@@ -9,7 +11,7 @@ import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
 
-import Swal from 'sweetalert2'
+console.disableYellowBox = true;
 
 function Header() {
     let [token, setToken] = useContext(TokenContext)

@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react'
+/* eslint-disable */
+
+import React, { useState, useRef } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext, UserIdContext, NameContext } from '../../App'
-import Swal from 'sweetalert2'
 
 const PostCard = (props) => {
     const Swal = require('sweetalert2')           
@@ -12,17 +13,8 @@ const PostCard = (props) => {
     let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
 
-    const [refreshPosts, setRefreshposts] = useState(null)
     const [modification, setModification] = useState(false)
-    const [like, setLike] = useState(true)
-    const [annulation, setAnnulation] = useState(false)
-    const [addLike, setAddLike] = useState(false)
-
-
-
-
-
-          
+         
     //*****************Modification d'un post */
     //--Récupération de la saisie de textArea et de l'image
     const textAreaAndImage = useRef([])
