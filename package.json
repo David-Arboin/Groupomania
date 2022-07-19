@@ -4,7 +4,7 @@
         "front": "cd frontend && yarn start",
         "sass": "cd frontend && yarn run sass",
         "back": "cd backend && nodemon",
-        "go": "concurrent \"yarn run front\" \"yarn run sass\" \"yarn run back\" "
+        "start": "concurrent \"yarn run front\" \"yarn run back\" "
     },
     "devDependencies": {
         "concurrent": "^1.0.0"
