@@ -193,6 +193,10 @@ textarea:focus-visible {
 button:focus-visible {
     transform: scale(1.5);
 }
+input[type="submit"]{
+    background-color: $color-primary;
+    color: $color-white;
+}
 input,
 label,
 button {
@@ -344,8 +348,10 @@ button {
     .displayTextAreaToModif {
         min-width: 80%;
         min-height: 200px;
-        border-radius: 2px;
-        margin: 0 0 5% 10%;
+        border-radius: 3vw;
+        margin: 0 0 5% 0;
+        padding-left: 3vw;
+        font-size: 3vw;
     }
 .displayText{
     font-size: 3vw;
@@ -360,6 +366,7 @@ button {
     }
     .displayButtons {
         width: 90%;
+        margin-bottom: 3vw;
     }
     .displayLikesAndNumberLikes {
         width: 20vw;
@@ -431,8 +438,12 @@ button {
         min-width: 80%;
         min-height: 200px;
         border-radius: 2px;
-        margin: 0 0 5% 10%;
+        margin: 0 0 5% 0;
+        border-radius: 2vw;
+        padding-left: 2vw;
+        font-size: 2vw;
     }
+
     .displayLikesAndNumberLikes{
         width: 30%;
     }
@@ -448,6 +459,7 @@ button {
 }
 .displayButtons{
     width: 90%;
+    margin-bottom: 3vw;
 }
     .displayinputImageAndButtonPublish {
         margin: 1vw 0 3vw 0;

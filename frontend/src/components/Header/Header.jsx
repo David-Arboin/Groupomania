@@ -9,6 +9,7 @@ import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
 
+import Swal from 'sweetalert2'
 
 function Header() {
     let [token, setToken] = useContext(TokenContext)
@@ -16,6 +17,9 @@ function Header() {
     let [name, setName] = useContext(NameContext)
 
     const navigate = useNavigate()
+    const SwalLogOut = require('sweetalert2')
+
+
 
     //--Déconnexion
     const logout = (e) => {
@@ -23,6 +27,13 @@ function Header() {
         setUserId('')
         setName(undefined)
         navigate('/')
+                //--Sweet Alert
+                SwalLogOut.fire({
+                    title: 'Au revoir et à bientôt !',
+                    text: '',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                  })
     }
 
     return (

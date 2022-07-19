@@ -6,12 +6,16 @@ import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
 import { LogInContext } from '../../App'
+import Swal from 'sweetalert2'
+
 
 export default function Section() {
     const [errorMessages, setErrorMessages] = useState({})
     const [signInInAndsignUpOrSignUp, setSignInInAndsignUpOrSignUp] =
         useState(true)
     const navigate = useNavigate()
+    const SwalWelcome = require('sweetalert2')
+
     let [token, setToken] = React.useContext(TokenContext)
     let [userId, setUserId] = React.useContext(UserIdContext)
     let [name, setName] = React.useContext(NameContext)
@@ -114,14 +118,23 @@ export default function Section() {
                     localStorage.setItem('userId', JSON.stringify(data.userId))
                     localStorage.setItem('name', JSON.stringify(data.name))
                     if (data.userId === undefined) {
-                        alert('Veuillez vous inscrire sur la partie de droite')
+                                           SwalWelcome.fire({
+                        title: '',
+                        text: 'Veuillez vous inscrire sur la partie de droite',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                      })
                     } else {
                         navigate('/homePage')
                     }
                 })
                 .catch(function (error) {
-                    console.log('Il y a un problème de connexion')
-                    alert('Il y a un problème de connexion')
+                    SwalWelcome.fire({
+                        title: '',
+                        text: 'Il y a un problème de connexion',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                      })
                     navigate('/')
                 })
         }
@@ -191,9 +204,12 @@ export default function Section() {
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
-                    alert(
-                        'Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter'
-                    )
+                    SwalWelcome.fire({
+                        title: '',
+                        text: 'Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                      })
                     setSignInInAndsignUpOrSignUp(false)
                 })
         }
@@ -298,7 +314,7 @@ export default function Section() {
     ) : (
         <section>
             {/* *******************************************SignIn*************************************************  */}
-            <div className="signIn">
+            <div className="signInAfterSignUp">
                 <h1>Mon compte vient d'être créé à l'instant !</h1>
                 <h1>Je me connecte juste dessous</h1>
                 <form

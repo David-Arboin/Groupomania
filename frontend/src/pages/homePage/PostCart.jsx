@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faThumbsUp } from '@fortawesome/free-solid-svg-icons'
 import { TokenContext, UserIdContext, NameContext } from '../../App'
-
-
+import Swal from 'sweetalert2'
 
 const PostCard = (props) => {
+    const Swal = require('sweetalert2')           
     const { post, setPosts } = props.data
 
     let [token, setToken] = React.useContext(TokenContext)
@@ -18,6 +18,11 @@ const PostCard = (props) => {
     const [annulation, setAnnulation] = useState(false)
     const [addLike, setAddLike] = useState(false)
 
+
+
+
+
+          
     //*****************Modification d'un post */
     //--Récupération de la saisie de textArea et de l'image
     const textAreaAndImage = useRef([])
@@ -37,7 +42,7 @@ const PostCard = (props) => {
         }
 
         if (form[0].value === '' && form[2].files[0] === undefined) {
-            alert('Vous avez oublié de saisir un texte et/ou un image')
+            Swal.fire('Vous avez oublié de saisir un texte et/ou un image')
         } else if (form[0].value === '' && form[2].files[0] !== undefined) {
             formData.append('image', form[2].files[0])
 
@@ -374,7 +379,7 @@ const PostCard = (props) => {
             </div>
             <div className="displayLikes">
                 <div className="displayLikesAndNumberLikes">
-                    {like === 1 ? (
+                    {!post.usersLiked.includes(userId) ? (
                         <FontAwesomeIcon
                             icon={faThumbsUp}
                             onClick={() => handleLike(post._id)}
