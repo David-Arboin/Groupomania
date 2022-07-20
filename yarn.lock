@@ -1703,7 +1703,7 @@ heroku-exec-util@0.7.5:
     temp "0.8.3"
     uuid "3.2.1"
 
-heroku@^7.60.2:
+heroku@7.60.2:
   version "7.60.2"
   resolved "https://registry.yarnpkg.com/heroku/-/heroku-7.60.2.tgz#fac2af57c18e86a0b66b916b060d8324f1c88cb7"
   integrity sha512-B6li1Uuy2FQ0HrJwYGtwv5h8cQFyZgKGmjg/PCZ/euEhF0/0yzsFUg8L7pGePe3EhgueAYrgyWjY1vjY4kzBew==
