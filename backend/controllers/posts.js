@@ -2,6 +2,9 @@
 const Post = require('../schemas/post');
 const fs = require('fs'); //--Donne accès aux fonctions qui permettent de modifier le système de fichier y compris les fonctions qui permettent de supprimer
 const path = require('path');
+const User = require('../schemas/user');
+const user = require('../schemas/user');
+
 require("dotenv").config()
 
 //**********Création d'un post
@@ -27,7 +30,7 @@ exports.modifyPost = (req, res, next) => {
         imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`//--Reconstruction de l'Url de l'image
     } : { ...req.body }
 //--Récupération du post dans la base et vérification qu'il appartient bien à la personne qui effectue la requête delete
-//--et autotisation à l'administrateur
+//--et autorisation à l'administrateur
     Post.findOne({ _id: req.params.id }).then(
         (post) => {
             if (!post) {
@@ -35,11 +38,14 @@ exports.modifyPost = (req, res, next) => {
                     error: new Error('Post non trouvée !')
                 })
             }
-            if (post.userId !== req.auth.userId && req.auth.userId !== process.env.adminUserId) {
+            User.findOne({ email: process.env.adminEmail })
+        .then(user => { 
+          const adminUserId = user._id.toString()
+            if (post.userId !== req.auth.userId && req.auth.userId !== adminUserId) {
                 return res.status(403).json({
                     error: new Error('Requête non autorisée !')
                 })
-            }
+            }})
 //--Suppression de lancienne image dans le système de fichier
             const fileName = post.imageUrl.split('/images/')[1]//--Nom de l'ancienne post
             fs.unlink(`images/${fileName}`, () => {
@@ -60,7 +66,10 @@ exports.deletePost = (req, res, next) => {
           if (!post) {
             return res.status(404).json({ message: 'Post non trouvée !' })
         }
-          if (post.userId !== req.auth.userId && req.auth.userId !== process.env.adminUserId) {
+        User.findOne({ email: process.env.adminEmail })
+        .then(user => {
+          const adminUserId = user._id.toString()
+          if (post.userId !== req.auth.userId && req.auth.userId !== adminUserId) {
               return res.status(403).json({ message: 'Requête non autorisée !'})
           }else {
             const filename = post.imageUrl.split('/images/')[1];//--Ici, split renvoit un tableau composé de deux éléments. 1- Ce qu'il y avant /images/ et un deuxième élément avec ce qu'il y après /images/
@@ -69,7 +78,7 @@ exports.deletePost = (req, res, next) => {
                     .then(() => res.status(200).json({ message: 'Post supprimé !'}))
                     .catch(error => res.status(400).json({ error }));
             });
-          }
+          }})
         })
           .catch(error => res.status(500).json({ error }));
 };
