@@ -1,15 +1,17 @@
 {
     "name": "language-tools",
     "scripts": {
-        "start":  "concurrently \"cd frontend && yarn start\" \"cd backend && nodemon server\""
+        "start": "concurrently \"cd frontend && yarn start\" \"cd backend && nodemon server\""
     },
     "devDependencies": {
         "concurrently": "^7.3.0"
     },
     "dependencies": {
-        "classnames": "^2.3.1"
+        "classnames": "^2.3.1",
+        "heroku": "^7.60.2"
     },
+    "version": "1.0.0",
     "engines": {
         "node": "18.x"
-      }
+    }
 }
