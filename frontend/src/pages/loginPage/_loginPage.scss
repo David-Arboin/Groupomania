@@ -21,6 +21,10 @@ input[type='submit'] {
     font-weight: bolder;
     transition: ease-in-out, width 0.35s ease-in-out;
 }
+#backgroudColorSubmitLogin{
+    background-color: $color-secondary;
+    color: $color-black;
+}
 
 input[type='text'] {
     width: 40%;
@@ -198,6 +202,10 @@ label {
     input[type='reset']:active,
     input[type='submit']:active {
         cursor: grabbing;
+    }
+    input[type='reset'],
+    input[type='submit'] {
+        border-radius: 2vw;
     }
     label {
         font-size: 6vw;
