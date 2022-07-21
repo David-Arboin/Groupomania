@@ -292,7 +292,7 @@ const PostCard = (props) => {
         ) : (
             <div data-set={post._id} className="displayPost">
                 <div className="conteneur">
-                    <h1 className="dispayNamePoster">Votre post</h1>
+                    <h1 className="dispayNamePoster">{post.name}</h1>
                     <h1 className="dispayNamePoster">{`Publié le ${new Date(
                         post.createdAt
                     ).toLocaleDateString('fr')} à ${new Date(
