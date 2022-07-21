@@ -49,6 +49,11 @@ input[type='reset']:focus-visible,
 input[type='submit']:focus-visible {
     background: $color-black;
     transform: scale(1.5);
+    color: $color-white;
+}
+#backgroudColorSubmitLogin:focus-visible{
+    background-color: $color-black;
+    color: $color-white;
 }
 input[type='reset'],
 input[type='submit'] {
