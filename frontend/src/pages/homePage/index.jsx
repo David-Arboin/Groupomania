@@ -39,7 +39,7 @@ export default function Section() {
                 })
                 setPosts(posts)
                 SwalWelcome.fire({
-                    title: 'Bonjour !',
+                    title: `Bonjour ${name} !`,
                     text: '',
                     icon: 'success',
                     confirmButtonText: 'Cool'

@@ -110,11 +110,7 @@ export default function Section() {
                     setToken(data.token)
                     setUserId(data.userId)
                     setName(data.name)
-                    console.log(data.token)
-                    console.log(data)
-                    localStorage.setItem('token', JSON.stringify(data.token))
-                    localStorage.setItem('userId', JSON.stringify(data.userId))
-                    localStorage.setItem('name', JSON.stringify(data.name))
+
                     if (data.userId === undefined) {
                                            SwalWelcome.fire({
                         title: '',
@@ -201,7 +197,6 @@ export default function Section() {
             )
                 .then((response) => response.json())
                 .then((data) => {
-                    console.log(data)
                     SwalWelcome.fire({
                         title: '',
                         text: 'Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter',
@@ -358,6 +353,7 @@ export default function Section() {
                             type="submit"
                             value="Je me connecte"
                             onClick={() => setSignInInAndsignUpOrSignUp(false)}
+                            id="backgroudColorSubmitLogin"
                         />
                     </div>
                 </form>
