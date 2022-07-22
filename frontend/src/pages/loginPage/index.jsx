@@ -297,7 +297,7 @@ export default function Section() {
                         <input 
                         type="submit" 
                         value="Je crée mon compte"
-                        id="backgroudColorSubmitLogin"
+                        id="backgroudColorSubmitSignUp"
                         />
                     </div>
                 </form>
@@ -353,7 +353,7 @@ export default function Section() {
                             type="submit"
                             value="Je me connecte"
                             onClick={() => setSignInInAndsignUpOrSignUp(false)}
-                            id="backgroudColorSubmitLogin"
+                            id="backgroudColorSubmitSignIn"
                         />
                     </div>
                 </form>
