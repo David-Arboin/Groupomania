@@ -1,11 +1,10 @@
 /* eslint-disable */
 import React, { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { } from '@fortawesome/react-fontawesome'
+import {} from '@fortawesome/react-fontawesome'
 import { TokenContext } from '../../App'
 import { UserIdContext } from '../../App'
 import { NameContext } from '../../App'
-
 
 export default function Section() {
     const [errorMessages, setErrorMessages] = useState({})
@@ -20,7 +19,7 @@ export default function Section() {
 
     setToken(undefined)
     setUserId('')
-    
+
     const errors = {
         name: "Ceci n'est pas un nom ou pseudonyme valide",
         email: "Ceci n'est pas une adresse mail valide",
@@ -112,12 +111,12 @@ export default function Section() {
                     setName(data.name)
 
                     if (data.userId === undefined) {
-                                           SwalWelcome.fire({
-                        title: '',
-                        text: 'Veuillez vous inscrire sur la partie de droite',
-                        icon: 'warning',
-                        confirmButtonText: 'Ok'
-                      })
+                        SwalWelcome.fire({
+                            title: '',
+                            text: 'Veuillez vous inscrire sur la partie de droite',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok',
+                        })
                     } else {
                         navigate('/homePage')
                     }
@@ -127,8 +126,8 @@ export default function Section() {
                         title: '',
                         text: 'Il y a un problème de connexion',
                         icon: 'warning',
-                        confirmButtonText: 'Ok'
-                      })
+                        confirmButtonText: 'Ok',
+                    })
                     navigate('/')
                 })
         }
@@ -201,8 +200,8 @@ export default function Section() {
                         title: '',
                         text: 'Votre compte a été enregistré ! Vous pouvez maintenant vous y connecter',
                         icon: 'success',
-                        confirmButtonText: 'Ok'
-                      })
+                        confirmButtonText: 'Ok',
+                    })
                     setSignInInAndsignUpOrSignUp(false)
                 })
         }
@@ -217,25 +216,18 @@ export default function Section() {
                 <h1>Je me connecte juste dessous</h1>
 
                 <form className="displayLogin" onSubmit={handleFormSignIn}>
-                    <label>Email</label>
-                    <label>
+                        <label for="emailSignIn">Email</label>
                         <input
-                            name="email"
+                            name="emailSignIn"
                             type="email"
                             ref={addInputsSignIn}
                             id="emailSignIn"
                             placeholder=""
                         />
-                        <div className="password-icon">
-                            <i className="fa-solid fa-eye"></i>
-                            <i className="fa-solid fa-eye-slash"></i>
-                        </div>
-                    </label>
-
                     {renderErrorMessage('emailErrorSignIn')}
-                    <label>Mot de passe</label>
+                    <label for="passwordSignIn">Mot de passe</label>
                     <input
-                        name="password"
+                        name="passwordSignIn"
                         type="password"
                         ref={addInputsSignIn}
                         id="passwordSignIn"
@@ -263,25 +255,27 @@ export default function Section() {
                 <h1>Je m'inscrit en un éclair</h1>
 
                 <form className="displaySignup" onSubmit={handleFormSignUp}>
-                    <label type="name" className='widthTextNameOrPseeudo'>Nom complet ou pseudonyme</label>
+                    <label for="nameSignUp" className="widthTextNameOrPseeudo">
+                        Nom complet ou pseudonyme
+                    </label>
                     <input
-                        name="name"
+                        name="nameSignUp"
                         type="text"
                         ref={addInputsSignUp}
                         id="nameSignUp"
                     />
                     {renderErrorMessage('nameErrorSignUp')}
-                    <label type="email">Email</label>
+                    <label for="emailSignUp">Email</label>
                     <input
-                        name="email"
+                        name="emailSignUp"
                         type="email"
                         ref={addInputsSignUp}
                         id="emailSignUp"
                     />
                     {renderErrorMessage('emailErrorSignUp')}
-                    <label type="password">Mot de passe</label>
+                    <label for="passwordSignUp">Mot de passe</label>
                     <input
-                        name="password"
+                        name="passwordSignUp"
                         type="password"
                         ref={addInputsSignUp}
                         id="passwordSignUp"
@@ -294,10 +288,10 @@ export default function Section() {
                             value="Tout effacer"
                             onClick={resetedSignUp}
                         />
-                        <input 
-                        type="submit" 
-                        value="Je crée mon compte"
-                        id="backgroudColorSubmitSignUp"
+                        <input
+                            type="submit"
+                            value="Je crée mon compte"
+                            id="backgroudColorSubmitSignUp"
                         />
                     </div>
                 </form>

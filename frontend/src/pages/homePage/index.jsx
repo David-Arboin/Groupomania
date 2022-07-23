@@ -197,10 +197,11 @@ export default function Section() {
             <div className="displayCreatePost">
                 <div className="hello">Bienvenue {name} 🙂</div>
                 <div className="displayTitleCreatePost">
-                    <h1 className="titleCreatePost">Créer un post</h1>
+                    <label for="post" className="titleCreatePost">Créer un post</label>
                 </div>
                 <form onSubmit={handleSubmit}>
                     <textarea
+                        id="post"
                         name="post"
                         type="text"
                         className="displayTextArea"
@@ -208,6 +209,8 @@ export default function Section() {
                         placeholder="Si vous le souhaitez, vous pouvez saisir du texte dans cette zone et choisir un image avec le boutton ci-dessous"
                     ></textarea>
                     <div className="displayinputImageAndButtonPublish">
+                        <div className='displayLabelAndInputImage'>
+                        <label for="image" id='colorLabelChooseImage'>Choisi une image</label>
                         <input
                             name="image"
                             type="file"
@@ -216,7 +219,8 @@ export default function Section() {
                             id="image"
                             alt="image poster par un utilisateur"
                         />
-                        <input className="styleButton" type="submit"></input>
+                        </div>
+                        <input className="styleButton" type="submit" value="Envoyer"></input>
                     </div>
                 </form>
             </div>
